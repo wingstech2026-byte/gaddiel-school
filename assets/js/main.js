@@ -39,9 +39,10 @@
     facebook: function () { return isPH(get("links.facebook")) ? null : S.links.facebook; },
     reviews: function () { return isPH(get("links.googleReviews")) ? null : S.links.googleReviews; },
     gofundme: function () { return isPH(get("links.gofundme")) ? null : S.links.gofundme; },
+    channel: function () { return isPH(get("links.whatsappChannel")) ? null : S.links.whatsappChannel; },
     directions: function () { return get("links.directions"); }
   };
-  var PH_LABEL = { tel: "phone number", whatsapp: "WhatsApp number", email: "email address", facebook: "Facebook page link", reviews: "Google reviews link", gofundme: "GoFundMe link" };
+  var PH_LABEL = { tel: "phone number", whatsapp: "WhatsApp number", email: "email address", facebook: "Facebook page link", reviews: "Google reviews link", gofundme: "GoFundMe link", channel: "WhatsApp Channel link" };
   function link(kind) { var f = LINKS[kind]; return f ? f() : null; }
 
   function applyLink(a) {
@@ -85,7 +86,7 @@
       '<span class="brand-text"><span class="brand-name">Gaddiel</span><span class="brand-sub">Nursery &amp; Preparatory School</span></span></a>' +
       '<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">' + I.menu + "<span>Menu</span></button>" +
       '<nav class="site-nav" id="site-nav" aria-label="Main"><ul>' + items +
-      '<li class="nav-lang"><a href="krio.html" lang="kri" hreflang="kri">Na Krio</a></li><li class="nav-cta"><a href="support.html"' + (page === "support.html" ? ' aria-current="page"' : "") + ">Support our school</a></li></ul></nav>" +
+      '<li class="nav-textsize">' + textSizeHTML() + '</li><li class="nav-lang"><a href="krio.html" lang="kri" hreflang="kri">Na Krio</a></li><li class="nav-cta"><a href="support.html"' + (page === "support.html" ? ' aria-current="page"' : "") + ">Support our school</a></li></ul></nav>" +
       "</div></header>";
 
     var btn = $(".nav-toggle", host), nav = $("#site-nav");
@@ -138,7 +139,10 @@
       '<div class="social">' +
       '<a data-href="facebook" href="#">' + I.facebook + "Facebook</a>" +
       '<a data-href="reviews" href="#">' + I.star + "Google reviews</a>" +
-      '<a data-href="gofundme" href="#">' + I.heart + "GoFundMe</a></div></div>" +
+      '<a data-href="gofundme" href="#">' + I.heart + "GoFundMe</a>" +
+      '<a data-href="channel" href="#">' + I.whatsapp + "WhatsApp Channel</a></div>" +
+      '<button class="install-btn" type="button" hidden>' + I.phone + "Install the Gaddiel app</button>" +
+      textSizeHTML() + "</div>" +
       "</div>" +
       '<div class="footer-bottom"><span>© ' + new Date().getFullYear() + " " + esc(S.name) + ". Founded " + esc(S.founded) + ".</span>" +
       "<span>“Train up a child in the way he should go.” Proverbs 22:6</span></div>" +
@@ -232,7 +236,7 @@
     galleries.forEach(function (g) {
       $$("button[data-full]", g).forEach(function (b) {
         b.addEventListener("click", function () {
-          items = $$("button[data-full]", g); opener = b;
+          items = $$("button[data-full]", g).filter(function (x) { return !x.hidden; }); opener = b;
           show(items.indexOf(b));
           lb.classList.add("open"); document.body.style.overflow = "hidden";
           $(".lb-close", lb).focus();
@@ -506,12 +510,107 @@
     Object.keys(map).forEach(function (id) { io.observe(document.getElementById(id)); });
   }
 
+  /* ---------- Announcement banner (assets/data/announcement.json) ---------- */
+  function announcement() {
+    fetch("assets/data/announcement.json", { cache: "no-cache" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (a) {
+        if (!a || !a.show || !a.text) return;
+        var key = "gnaps-ann-" + a.text;
+        try { if (localStorage.getItem(key)) return; } catch (e) { /* storage blocked */ }
+        var bar = document.createElement("div");
+        bar.className = "announce" + (a.style === "urgent" ? " announce--urgent" : "");
+        bar.setAttribute("role", "region");
+        bar.setAttribute("aria-label", "School announcement");
+        bar.innerHTML = '<div class="wrap"><p>' + esc(a.text) +
+          (a.link ? ' <a href="' + esc(a.link) + '">' + esc(a.linkText || "Read more") + "</a>" : "") +
+          '</p><button type="button" aria-label="Hide this announcement">&times;</button></div>';
+        var hdr = $("#site-header");
+        hdr.parentNode.insertBefore(bar, hdr);
+        $("button", bar).addEventListener("click", function () {
+          bar.parentNode.removeChild(bar);
+          try { localStorage.setItem(key, "1"); } catch (e) { /* storage blocked */ }
+        });
+      })
+      .catch(function () { /* no banner when offline */ });
+  }
+
+  /* ---------- Text size (A / A+ / A++) ---------- */
+  function textSizeHTML() {
+    var names = ["Normal text size", "Larger text", "Largest text"];
+    return '<div class="text-size" role="group" aria-label="Text size"><span>Text size</span>' +
+      ["A", "A+", "A++"].map(function (l, i) {
+        return '<button type="button" data-size="' + i + '" aria-pressed="false" aria-label="' + names[i] + '">' + l + "</button>";
+      }).join("") + "</div>";
+  }
+  function textSize() {
+    var cur = 0;
+    try { cur = Number(localStorage.getItem("gnaps-text-size")) || 0; } catch (e) { /* storage blocked */ }
+    function apply(n) {
+      document.documentElement.setAttribute("data-text-size", n);
+      $$("[data-size]").forEach(function (b) { b.setAttribute("aria-pressed", Number(b.getAttribute("data-size")) === n); });
+      try { localStorage.setItem("gnaps-text-size", n); } catch (e) { /* storage blocked */ }
+    }
+    apply(cur);
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("[data-size]");
+      if (b) apply(Number(b.getAttribute("data-size")));
+    });
+  }
+
+  /* ---------- "Install the Gaddiel app" button ---------- */
+  function installApp() {
+    var deferred = null;
+    window.addEventListener("beforeinstallprompt", function (e) {
+      e.preventDefault();
+      deferred = e;
+      $$(".install-btn").forEach(function (b) { b.hidden = false; });
+    });
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest(".install-btn");
+      if (!b || !deferred) return;
+      deferred.prompt();
+      deferred.userChoice.then(function () {
+        deferred = null;
+        $$(".install-btn").forEach(function (x) { x.hidden = true; });
+      });
+    });
+  }
+
+  /* ---------- Gallery filter buttons ---------- */
+  function galleryFilters() {
+    $$(".filter-bar").forEach(function (bar) {
+      var g = document.getElementById(bar.getAttribute("data-for"));
+      if (!g) return;
+      bar.addEventListener("click", function (e) {
+        var b = e.target.closest("button[data-filter]");
+        if (!b) return;
+        var f = b.getAttribute("data-filter");
+        $$("button[data-filter]", bar).forEach(function (x) { x.setAttribute("aria-pressed", x === b); });
+        $$("button[data-full]", g).forEach(function (p) { p.hidden = f !== "all" && p.getAttribute("data-cat") !== f; });
+      });
+    });
+  }
+
+  /* ---------- Fee payment details (site-data.js → payments) ---------- */
+  function paymentMethods() {
+    var box = $("#payment-methods"), p = S.payments;
+    if (!box || !p) return;
+    box.innerHTML = (p.methods || []).map(function (m) {
+      return '<div class="card pay-card"><h3>' + esc(m.title) + '</h3><ul class="pay-list">' +
+        (m.details || []).map(function (d) { return "<li><span>" + esc(d[0]) + "</span><strong>" + esc(d[1]) + "</strong></li>"; }).join("") +
+        "</ul>" + (m.note ? '<p class="muted">' + esc(m.note) + "</p>" : "") + "</div>";
+    }).join("");
+    $$("[data-pay-ref]").forEach(function (el) { el.textContent = p.reference; });
+  }
+
   /* ---------- Start ---------- */
   renderHeader();
   renderFooter();
   reviews(); staff(); people("teachers", S.teachers); people("support-staff", S.supportStaff); enrolmentChart(); progressStory(); donationNeeds(); share();
   bindData();
   counters(); reveal(); maps(); lightbox(); forms(); upcoming(); directorWelcome(); subnav();
+  announcement(); textSize(); installApp(); galleryFilters(); paymentMethods();
 
   /* ---------- Offline mode: save visited pages on the phone ---------- */
   var host = location.hostname, local = host === "localhost" || host === "127.0.0.1";

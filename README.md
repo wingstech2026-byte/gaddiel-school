@@ -10,7 +10,10 @@ It is made of plain files. There is nothing to install and no "build" step.
 | What you want to change | File to open |
 |---|---|
 | Phone, email, WhatsApp, hours, pupil numbers, links, reviews, staff, donation list | `assets/js/site-data.js` |
+| **News, events and the announcement banner (easiest)** | the website editor at `/admin/` (section 18) |
 | Term dates, holidays and events | `assets/data/calendar.json` |
+| Announcement banner | `assets/data/announcement.json` |
+| Fee payment details | `assets/js/site-data.js` → `payments` |
 | News stories | `assets/data/news.json` |
 | Photos | `assets/img/` |
 | Teachers and support staff | `assets/js/site-data.js` → `teachers`, `supportStaff` |
@@ -49,6 +52,8 @@ Search the project for the word `PLACEHOLDER` to find every one. They are:
 | Fees list | `assets/docs/gaddiel-fees.pdf` | replace with the real fees (see section 12) |
 | Documents to bring | `assets/docs/gaddiel-admission-form.pdf`, section 3 | replace the PDF with the school’s own version once the list is confirmed |
 | Krio page | `krio.html` | a **draft**. Ask a fluent Krio speaker to check it, then remove the yellow DRAFT box |
+| WhatsApp Channel link | `site-data.js` → `links.whatsappChannel` | the invite link of the school’s WhatsApp Channel (section 22) |
+| Payment details | `site-data.js` → `payments` | the school’s **own** Orange Money and Afrimoney numbers, account names and bank details (section 21) |
 | FAQ answers for ages and fees | `admissions.html` → "Questions parents often ask" | search for `[PLACEHOLDER]` in the FAQ section |
 | Phone and email for Google | `index.html` and `contact.html`, in the block that starts `<script type="application/ld+json">` | same phone and email as above |
 | Term dates and event dates | `assets/data/calendar.json` | the school's real dates (see section 4) |
@@ -152,7 +157,7 @@ Leave everything inside `< >` alone. The menu and footer are the same on every p
 4. In `assets/js/site-data.js`, set `formspreeId: "xyzabcd",`
 5. Publish the site, send a test message from the Contact page, and confirm the email in Formspree the first time.
 
-The Contact form, the Admissions enquiry form, the **Apply online** form and the Home page “Stay in touch” sign-up will then all send messages to the school's email. Each form checks the fields before sending, shows a thank-you message, and has a hidden "honeypot" field that catches spam robots.
+The Contact form, the Admissions enquiry form, the **Apply online** form and the Home page “Stay in touch” sign-up, the “Tell us you’ve paid” form (Paying fees page) and the “Other ways to help” form (Support page) will then all send messages to the school's email. Each form checks the fields before sending, shows a thank-you message, and has a hidden "honeypot" field that catches spam robots.
 
 ---
 
@@ -264,4 +269,75 @@ The site is ready for **Vercel Web Analytics** (free, no cookies, no pop-up need
 1. Open the project on <https://vercel.com>.
 2. Click the **Analytics** tab, then **Enable**.
 3. Visits start appearing within a few minutes. You can see the number of visitors, the most popular pages, and which countries and devices people use.
+
+---
+
+## 18. Website editor for staff (no code)
+
+Staff can add news, add or change calendar events, and switch the announcement banner on or off by filling in simple forms. Open:
+
+**https://gaddiel-school.vercel.app/admin/** (use your real web address followed by `/admin/`)
+
+**One-time setup (about 5 minutes)**
+
+1. The staff member needs a GitHub account that can edit the `gaddiel-school` repository. Use the school’s account, or add theirs under the repository’s **Settings → Collaborators**.
+2. Signed in to GitHub, go to <https://github.com/settings/personal-access-tokens/new>.
+3. Give it a name (e.g. "Gaddiel website editor") and set an expiry date (e.g. 1 year).
+4. Under **Repository access**, choose **Only select repositories**, then **gaddiel-school**.
+5. Under **Permissions → Repository permissions**, set **Contents** to **Read and write**.
+6. Click **Generate token** and copy it. It starts with `github_pat_`. **Keep it secret**, like a password.
+7. Open `/admin/`, click **Sign In Using Access Token**, and paste the token.
+
+**Using it**
+
+- **Website content → News stories:** click **Add Story**, fill in the date, title and summary, and add a photo if you like. Click **Save**.
+- **Website content → Calendar events:** add or change term dates, holidays and events.
+- **Website content → Announcement banner:** tick **Show the banner**, write a short message, and choose Blue or Gold (urgent). Untick it when it is no longer needed.
+
+Each **Save** updates GitHub, and Vercel puts the change live within about a minute. Photos uploaded in the editor are automatically made smaller.
+
+The other facts (phone numbers, pupil numbers, staff, payment details) are still edited in `assets/js/site-data.js`.
+
+---
+
+## 19. Announcement banner
+
+A dark-blue bar at the very top of every page, used for news like "Admissions are open" (switched on now) or "School closed on Friday". Choose **Gold** for urgent messages. Visitors can close it with ×, and it stays closed until the message changes. Change it in the website editor (section 18) or in `assets/data/announcement.json`. Set `"show": false` to hide it.
+
+---
+
+## 20. Install as an app
+
+Parents can add the website to their phone’s home screen, where it opens with the Gaddiel logo like an app and works offline (section 16).
+
+- **Android (Chrome):** an **Install the Gaddiel app** button appears in the footer. Or use the Chrome menu ⋮ → **Add to Home screen**.
+- **iPhone (Safari):** tap the Share button → **Add to Home Screen**.
+
+The app’s name and colours are in `manifest.webmanifest`. The icons are `assets/img/icon-192.png`, `icon-512.png` and `icon-maskable-512.png`.
+
+---
+
+## 21. Paying fees page (`fees.html`)
+
+This page explains how to pay by Orange Money, Afrimoney, bank transfer or at the office. It has a safety warning against fake numbers and a **Tell us you’ve paid** form. Fill in the real details in `site-data.js` → `payments`. **Only list numbers and accounts that belong to the school.**
+
+The website does not take payments itself. Parents pay through their own mobile money or bank, then tell the school using the form.
+
+---
+
+## 22. WhatsApp Channel
+
+Create a WhatsApp Channel for the school (in WhatsApp: **Updates → + → Create channel**). Then copy its invite link and paste it into `site-data.js` → `links.whatsappChannel`. A **Join our WhatsApp Channel** button then works on the Home page and in the footer.
+
+---
+
+## 23. Gallery filters
+
+On the School Life page, the buttons above the photo gallery (**All, Classroom, Thanksgiving, Family Day, Playground**) show one kind of photo at a time. Each photo’s kind is set by `data-cat="…"` on its `<button>` in `school-life.html`. Use `classroom`, `thanksgiving`, `family` or `play`.
+
+---
+
+## 24. Text size
+
+Every page has **A / A+ / A++** buttons, in the footer and in the phone menu, to make the text bigger. The choice is remembered on that phone.
 

@@ -3,14 +3,14 @@
    so the site still opens when there is no mobile data.
    Staff do not need to edit this file. If you ever rename or remove one of
    the files in CORE below, update the list and change VERSION (e.g. v2). */
-var VERSION = "gnaps-v1";
+var VERSION = "gnaps-v2";
 var CORE = [
   "./", "index.html", "about.html", "programmes.html", "school-life.html",
   "admissions.html", "apply.html", "calendar.html", "support.html", "news.html",
-  "contact.html", "teachers.html", "krio.html", "offline.html",
+  "contact.html", "teachers.html", "krio.html", "fees.html", "offline.html", "manifest.webmanifest",
   "assets/css/style.css", "assets/js/site-data.js", "assets/js/main.js",
   "assets/js/calendar.js", "assets/js/news.js",
-  "assets/data/calendar.json", "assets/data/news.json",
+  "assets/data/calendar.json", "assets/data/news.json", "assets/data/announcement.json",
   "assets/img/logo.png", "assets/img/logo-white.png", "favicon.ico"
 ];
 
@@ -53,6 +53,7 @@ self.addEventListener("fetch", function (e) {
   var url = new URL(req.url);
   if (url.origin !== self.location.origin) return;          // maps, fonts, forms: leave to the browser
   if (url.pathname.indexOf("/_vercel/") === 0) return;        // visitor statistics
+  if (url.pathname.indexOf("/admin") === 0) return;           // staff website editor
   if (/\.(mp4|pdf)$/i.test(url.pathname)) return;             // large files are not saved
   if (req.mode === "navigate" || /(\/|\.html|\.json|\.js|\.css)$/i.test(url.pathname)) {
     e.respondWith(networkFirst(req));

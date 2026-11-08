@@ -532,3 +532,44 @@ body { padding-bottom: 70px; }
 .dev-credit { margin: 16px 0 0; font-size: .85rem; color: #aebfd9; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; text-align: center; }
 .dev-credit img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); flex: none; }
 .dev-credit a { color: #fff; }
+
+/* ===== Announcement, text size, install, gallery filters, fees ===== */
+html[data-text-size="1"] { font-size: 112.5%; }
+html[data-text-size="2"] { font-size: 125%; }
+
+.announce { background: var(--blue-900); color: #fff; font-size: 1rem; }
+.announce .wrap { display: flex; align-items: center; gap: 12px; padding-top: 10px; padding-bottom: 10px; }
+.announce p { margin: 0; flex: 1; }
+.announce a { color: var(--gold); font-weight: 700; }
+.announce button { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 1.5rem; line-height: 1; cursor: pointer; }
+.announce button:hover { background: rgba(255,255,255,.28); }
+.announce--urgent { background: var(--gold); color: var(--blue-900); }
+.announce--urgent a { color: var(--blue-900); }
+.announce--urgent button { background: rgba(13,42,92,.12); color: var(--blue-900); }
+
+.text-size { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.text-size span { font-weight: 600; margin-right: 4px; }
+.text-size button { min-width: 44px; min-height: 40px; padding: 4px 10px; border-radius: 10px; border: 2px solid currentColor; background: transparent; color: inherit; font: inherit; font-weight: 700; cursor: pointer; }
+.text-size button[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--blue-900); }
+.site-footer .text-size { margin-top: 16px; color: #fff; }
+.site-nav .nav-textsize { padding: 10px 14px; color: var(--grey-800); }
+@media (min-width: 1180px) { .site-nav .nav-textsize { display: none; } }
+
+.install-btn { margin-top: 14px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border-radius: 99px; border: 2px solid var(--gold); background: transparent; color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+.install-btn:hover { background: var(--gold); color: var(--blue-900); }
+.install-btn[hidden] { display: none; }
+
+.filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.filter-bar button { min-height: 44px; padding: 8px 18px; border-radius: 99px; border: 2px solid var(--blue-700); background: #fff; color: var(--blue-700); font: inherit; font-weight: 700; cursor: pointer; }
+.filter-bar button[aria-pressed="true"] { background: var(--blue-700); color: #fff; }
+.gallery button[hidden] { display: none; }
+
+.pay-card h3 { margin-bottom: 10px; }
+.pay-list { list-style: none; padding: 0; margin: 0 0 8px; }
+.pay-list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; padding: 8px 0; border-bottom: 1px dashed var(--grey-200); }
+.pay-list li:last-child { border-bottom: 0; }
+.pay-list span { color: var(--muted); }
+.pay-list strong { color: var(--blue-900); overflow-wrap: anywhere; }
+.safety-note { background: #fdecea; border: 2px solid #f1a39a; color: #7a1a12; border-radius: var(--radius-sm); padding: 14px 18px; font-weight: 600; }
+
+@media print { .announce, .text-size, .install-btn, .filter-bar { display: none !important; } }

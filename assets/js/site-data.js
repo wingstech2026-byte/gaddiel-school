@@ -46,6 +46,8 @@ window.SITE = {
     facebook: "[PLACEHOLDER Facebook page URL]",
     googleReviews: "[PLACEHOLDER Google reviews URL]",
     gofundme: "[PLACEHOLDER GoFundMe URL]",
+    /* WhatsApp Channel invite link, e.g. https://whatsapp.com/channel/... */
+    whatsappChannel: "[PLACEHOLDER WhatsApp Channel link]",
     directions: "https://www.google.com/maps/dir/?api=1&destination=143+Fort+Street,+Freetown,+Sierra+Leone",
     mapEmbed: "https://www.google.com/maps?q=143+Fort+Street,+Freetown,+Sierra+Leone&output=embed"
   },
@@ -114,6 +116,18 @@ window.SITE = {
     { name: "[PLACEHOLDER] Name", role: "Helper", intro: "Helps our youngest pupils through the school day.", photo: "assets/img/placeholder-staff.svg" },
     { name: "[PLACEHOLDER] Name", role: "Maintenance worker", intro: "Keeps our school clean, safe and in good repair.", photo: "assets/img/placeholder-staff.svg" }
   ],
+
+  /* PAYING FEES (fees.html). Replace each [PLACEHOLDER] with the real details.
+     Only list numbers and accounts that belong to the school. */
+  payments: {
+    reference: "Write your child’s full name and class as the payment reference.",
+    methods: [
+      { title: "Orange Money", details: [["Number", "[PLACEHOLDER Orange Money number]"], ["Account name", "[PLACEHOLDER account name]"]] },
+      { title: "Afrimoney", details: [["Number", "[PLACEHOLDER Afrimoney number]"], ["Account name", "[PLACEHOLDER account name]"]] },
+      { title: "Bank transfer", details: [["Bank", "[PLACEHOLDER bank name]"], ["Account name", "[PLACEHOLDER account name]"], ["Account number", "[PLACEHOLDER account number]"], ["Branch", "[PLACEHOLDER branch]"]] },
+      { title: "At the school office", details: [["Where", "143 Fort Street, Freetown"], ["When", "Monday to Friday, 8:00 AM – 3:00 PM"]], note: "Always ask for a receipt." }
+    ]
+  },
 
   /* PARENT REVIEWS (Home page) - use real quotes, with permission */
   reviews: [

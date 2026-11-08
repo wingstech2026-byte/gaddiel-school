@@ -1,0 +1,7 @@
+{
+  "show": true,
+  "text": "Admissions are open for Nursery and Preparatory classes.",
+  "linkText": "Book a visit",
+  "link": "admissions.html?visit=1#enquiry",
+  "style": "info"
+}

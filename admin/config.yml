@@ -1,0 +1,102 @@
+# Gaddiel website editor settings (Sveltia CMS).
+# Staff open https://<your-site>/admin/ and sign in with a GitHub token (see README section 18).
+
+backend:
+  name: github
+  repo: wingstech2026-byte/gaddiel-school
+  branch: main
+  commit_messages:
+    update: "Update {{collection}} from the website editor"
+
+site_url: https://gaddiel-school.vercel.app
+display_url: https://gaddiel-school.vercel.app
+logo:
+  src: /assets/img/logo.png
+
+# Photos uploaded in the editor are saved here, made smaller and converted to WebP.
+media_folder: assets/img/uploads
+public_folder: /assets/img/uploads
+media_libraries:
+  default:
+    config:
+      max_file_size: 8000000
+      transformations:
+        raster_image:
+          format: webp
+          quality: 75
+          width: 1200
+          height: 1200
+
+collections:
+  - name: content
+    label: Website content
+    files:
+      - name: announcement
+        label: Announcement banner
+        file: assets/data/announcement.json
+        format: json
+        fields:
+          - { name: show, label: Show the banner on every page, widget: boolean, default: false }
+          - { name: text, label: Message, widget: string, required: false, hint: "Keep it short, e.g. School is closed on Friday for Independence Day." }
+          - { name: linkText, label: Button text (optional), widget: string, required: false, hint: "e.g. Read more" }
+          - { name: link, label: Button link (optional), widget: string, required: false, hint: "e.g. calendar.html or news.html#carol-service-2026" }
+          - name: style
+            label: Colour
+            widget: select
+            default: info
+            options:
+              - { label: "Blue (general news)", value: info }
+              - { label: "Gold (urgent)", value: urgent }
+
+      - name: news
+        label: News stories
+        file: assets/data/news.json
+        format: json
+        fields:
+          - { name: _help, widget: hidden, default: "Edited with the website editor at /admin/." }
+          - name: news
+            label: Stories
+            label_singular: Story
+            widget: list
+            summary: "{{fields.date}}: {{fields.title}}"
+            fields:
+              - { name: id, label: Short web name, widget: string, hint: "Lower-case words joined with dashes, e.g. carol-service-2026" }
+              - { name: date, label: Date, widget: datetime, time_format: false, format: YYYY-MM-DD }
+              - { name: title, label: Title, widget: string }
+              - { name: summary, label: Summary (one or two sentences), widget: text }
+              - name: body
+                label: More paragraphs (optional)
+                widget: list
+                required: false
+                field: { name: paragraph, label: Paragraph, widget: text }
+              - { name: image, label: Photo (optional), widget: image, required: false }
+              - { name: imageAlt, label: Describe the photo, widget: string, required: false, hint: "e.g. Pupils singing at the Carol Service" }
+
+      - name: calendar
+        label: Calendar events
+        file: assets/data/calendar.json
+        format: json
+        fields:
+          - { name: _help, widget: hidden, default: "Edited with the website editor at /admin/." }
+          - name: events
+            label: Events
+            label_singular: Event
+            widget: list
+            summary: "{{fields.start}}: {{fields.title}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: start, label: Date (or first day), widget: datetime, time_format: false, format: YYYY-MM-DD }
+              - { name: end, label: Last day (only for events lasting several days), widget: datetime, time_format: false, format: YYYY-MM-DD, required: false }
+              - { name: time, label: Start time (optional), widget: string, required: false, hint: "24-hour clock, e.g. 10:00" }
+              - { name: endTime, label: End time (optional), widget: string, required: false, hint: "e.g. 12:30" }
+              - name: type
+                label: Type
+                widget: select
+                default: event
+                options:
+                  - { label: School event, value: event }
+                  - { label: Term dates, value: term }
+                  - { label: Holiday, value: holiday }
+              - { name: location, label: Place (optional), widget: string, required: false, hint: "Leave empty for the school address" }
+              - { name: description, label: Description, widget: text, required: false }
+              - { name: tbc, label: Date to be confirmed, widget: boolean, default: false }
