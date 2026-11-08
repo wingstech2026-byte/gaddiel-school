@@ -529,5 +529,6 @@ body { padding-bottom: 70px; }
 }
 
 /* Website developer credit */
-.dev-credit { margin: 14px 0 0; font-size: .85rem; color: #aebfd9; text-align: center; }
+.dev-credit { margin: 16px 0 0; font-size: .85rem; color: #aebfd9; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; text-align: center; }
+.dev-credit img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); flex: none; }
 .dev-credit a { color: #fff; }

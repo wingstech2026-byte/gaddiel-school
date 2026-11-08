@@ -141,6 +141,7 @@ window.SITE = {
   developer: {
     name: "Marrah",
     email: "wingstech2026@gmail.com",
-    whatsapp: "8619382020640"
+    whatsapp: "8619382020640",
+    photo: "assets/img/developer.jpg"
   }
 };

@@ -113,7 +113,8 @@
     var bits = ["Website developed by <strong>" + esc(d.name) + "</strong>"];
     if (!isPH(d.email)) bits.push('<a href="mailto:' + esc(d.email) + '">' + esc(d.email) + "</a>");
     if (!isPH(d.whatsapp)) bits.push('<a href="https://wa.me/' + String(d.whatsapp).replace(/\D/g, "") + '" target="_blank" rel="noopener">WhatsApp</a>');
-    return '<p class="dev-credit">' + bits.join(" · ") + "</p>";
+    var photo = d.photo ? '<img src="' + esc(d.photo) + '" alt="' + esc(d.name) + ', website developer" width="40" height="40" loading="lazy">' : "";
+    return '<p class="dev-credit">' + photo + "<span>" + bits.join(" · ") + "</span></p>";
   }
 
   function renderFooter() {
