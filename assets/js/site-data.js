@@ -141,6 +141,6 @@ window.SITE = {
   developer: {
     name: "Marrah",
     email: "wingstech2026@gmail.com",
-    whatsapp: "[PLACEHOLDER developer WhatsApp]"
+    whatsapp: "8619382020640"
   }
 };

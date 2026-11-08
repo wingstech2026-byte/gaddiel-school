@@ -46,7 +46,6 @@ Search the project for the word `PLACEHOLDER` to find every one. They are:
 | Admission requirements | `admissions.html` (yellow box) | ages, documents to bring, fees, when forms are available |
 | Director’s welcome letter | `site-data.js` → `directorWelcome` | a **draft** written from the approved wording. The Director should read and edit it, then change `draft: true` to `draft: false` to remove the yellow DRAFT note |
 | Teachers’ names, classes, introductions and photos | `site-data.js` → `teachers` and `supportStaff` | the six teachers, the helper and the maintenance worker (see section 11) |
-| Developer WhatsApp | `site-data.js` → `developer.whatsapp` | the developer’s WhatsApp number, digits only (the credit at the bottom of each page shows it once added) |
 | Fees list | `assets/docs/gaddiel-fees.pdf` | replace with the real fees (see section 12) |
 | Documents to bring | `assets/docs/gaddiel-admission-form.pdf`, section 3 | replace the PDF with the school’s own version once the list is confirmed |
 | Krio page | `krio.html` | a **draft**. Ask a fluent Krio speaker to check it, then remove the yellow DRAFT box |
