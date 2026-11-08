@@ -1,0 +1,10 @@
+# Original photos, videos and documents (not part of the website)
+/*.jpg
+/*.jpeg
+/*.JPG
+/*.JPEG
+/*.mp4
+/*.docx
+# Tool folders
+.playwright-mcp/
+.vscode/

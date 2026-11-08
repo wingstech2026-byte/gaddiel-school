@@ -1,0 +1,28 @@
+{
+  "_help": "One event per { } block. start/end are YYYY-MM-DD. type is term, holiday or event. time is optional (24-hour, e.g. 10:00). Set tbc to true if the date is not final. Remember the comma between blocks.",
+  "events": [
+    { "title": "5th Anniversary of Gaddiel School", "start": "2026-09-13", "type": "event", "description": "Five years since we opened on 13 September 2021. All glory to God!", "tbc": false },
+    { "title": "First term begins", "start": "2026-09-14", "type": "term", "description": "Welcome back! School opens at 8:00 AM.", "tbc": true },
+    { "title": "Mid-term break", "start": "2026-10-29", "end": "2026-10-30", "type": "holiday", "description": "No school for pupils.", "tbc": true },
+    { "title": "Carol Service", "start": "2026-12-11", "time": "10:00", "endTime": "12:00", "type": "event", "description": "Our end-of-term Carol Service. Parents and families are warmly invited.", "tbc": true },
+    { "title": "Christmas Party", "start": "2026-12-15", "time": "10:00", "endTime": "13:00", "type": "event", "description": "A joyful Christmas Party for all pupils.", "tbc": true },
+    { "title": "First term ends", "start": "2026-12-16", "type": "term", "description": "Last day of the first term.", "tbc": true },
+    { "title": "Christmas holiday", "start": "2026-12-17", "end": "2027-01-03", "type": "holiday", "description": "Merry Christmas and a happy New Year from the Gaddiel family.", "tbc": true },
+    { "title": "Christmas Day", "start": "2026-12-25", "type": "holiday", "description": "Public holiday.", "tbc": false },
+    { "title": "Boxing Day", "start": "2026-12-26", "type": "holiday", "description": "Public holiday.", "tbc": false },
+    { "title": "New Year's Day", "start": "2027-01-01", "type": "holiday", "description": "Public holiday.", "tbc": false },
+    { "title": "Second term begins", "start": "2027-01-04", "type": "term", "description": "School reopens at 8:00 AM.", "tbc": true },
+    { "title": "Armed Forces Day", "start": "2027-02-18", "type": "holiday", "description": "Public holiday.", "tbc": false },
+    { "title": "Thanksgiving Service and parade", "start": "2027-02-28", "time": "09:00", "type": "event", "description": "We go to church together to give thanks to God, followed by a parade with a marching band.", "tbc": true },
+    { "title": "Family Day at Family Fun Outdoors", "start": "2027-03-13", "time": "10:00", "endTime": "15:00", "type": "event", "location": "Family Fun Outdoors, Freetown", "description": "Pupils and parents spend the day together at Family Fun Outdoors for games and activities.", "tbc": true },
+    { "title": "Eid al-Fitr", "start": "2027-03-10", "type": "holiday", "description": "Public holiday. Date depends on the moon.", "tbc": true },
+    { "title": "Second term ends", "start": "2027-03-24", "type": "term", "description": "Last day of the second term.", "tbc": true },
+    { "title": "Good Friday", "start": "2027-03-26", "type": "holiday", "description": "Public holiday.", "tbc": false },
+    { "title": "Easter Monday", "start": "2027-03-29", "type": "holiday", "description": "Public holiday.", "tbc": false },
+    { "title": "Third term begins", "start": "2027-04-12", "type": "term", "description": "School reopens at 8:00 AM.", "tbc": true },
+    { "title": "Independence Day", "start": "2027-04-27", "type": "holiday", "description": "Public holiday.", "tbc": false },
+    { "title": "Eid al-Adha", "start": "2027-05-17", "type": "holiday", "description": "Public holiday. Date depends on the moon.", "tbc": true },
+    { "title": "Nursery Graduation Ceremony and reception", "start": "2027-07-09", "time": "10:00", "endTime": "13:00", "type": "event", "description": "We celebrate our youngest learners, followed by a reception for pupils and their families.", "tbc": true },
+    { "title": "Third term ends", "start": "2027-07-16", "type": "term", "description": "Last day of the academic year. Have a blessed holiday!", "tbc": true }
+  ]
+}

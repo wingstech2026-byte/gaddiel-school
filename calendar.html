@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>School Calendar: Term Dates and Events | Gaddiel School</title>
+<meta name="description" content="Gaddiel term dates, holidays and events for 2026/2027, with a month view, list view and Add to my calendar links for every event.">
+<link rel="canonical" href="https://gaddiel-school.netlify.app/calendar.html">
+<meta name="theme-color" content="#1a4fa0">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gaddiel Nursery &amp; Preparatory School">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="School Calendar: Term Dates and Events | Gaddiel School">
+<meta property="og:description" content="Gaddiel term dates, holidays and events for 2026/2027, with a month view, list view and Add to my calendar links for every event.">
+<meta property="og:url" content="https://gaddiel-school.netlify.app/calendar.html">
+<meta property="og:image" content="https://gaddiel-school.netlify.app/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pupils, staff and families of Gaddiel Nursery &amp; Preparatory School">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="School Calendar: Term Dates and Events | Gaddiel School">
+<meta name="twitter:description" content="Gaddiel term dates, holidays and events for 2026/2027, with a month view, list view and Add to my calendar links for every event.">
+<meta name="twitter:image" content="https://gaddiel-school.netlify.app/assets/img/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div id="site-header"><noscript><nav class="wrap" style="padding:12px 16px" aria-label="Main"><a href="index.html">Home</a> · <a href="about.html">About</a> · <a href="programmes.html">Programmes</a> · <a href="school-life.html">School Life</a> · <a href="admissions.html">Admissions</a> · <a href="calendar.html">Calendar</a> · <a href="news.html">News</a> · <a href="contact.html">Contact</a> · <a href="support.html">Support our school</a></nav></noscript></div>
+<main id="main">
+<section class="page-hero"><div class="wrap">
+<p class="crumbs"><a href="index.html">Home</a> / Calendar</p>
+<h1>School calendar</h1>
+<p>Term dates, holidays and upcoming events, including our Carol Service, Thanksgiving Service, Family Day and Nursery Graduation.</p>
+</div></section>
+<section class="section">
+<div class="wrap" id="calendar-app">
+<p class="placeholder-note">Dates marked “Date to be confirmed” may change. Tap “Add to my calendar” to save an event on your phone.</p>
+<div class="view-tabs" role="tablist" aria-label="Calendar view" style="margin-top:20px">
+<button type="button" role="tab" id="tab-month" aria-controls="view-month" aria-selected="true" data-view="month">Month view</button>
+<button type="button" role="tab" id="tab-list" aria-controls="view-list" aria-selected="false" data-view="list" tabindex="-1">List view</button>
+</div>
+
+<div id="view-month" role="tabpanel" aria-labelledby="tab-month">
+<div class="cal-head">
+<button class="cal-nav" id="cal-prev" type="button" aria-label="Previous month">&#8249;</button>
+<h2 id="cal-title" aria-live="polite">Month</h2>
+<button class="cal-nav" id="cal-next" type="button" aria-label="Next month">&#8250;</button>
+</div>
+<div class="cal-grid" id="cal-grid"></div>
+<div class="cal-legend"><span class="l-term">Term dates</span><span class="l-event">School events</span><span class="l-holiday">Holidays</span></div>
+<div id="cal-day-events" aria-live="polite"></div>
+</div>
+
+<div id="view-list" role="tabpanel" aria-labelledby="tab-list" hidden>
+<label style="display:inline-flex;gap:10px;align-items:center;font-weight:600;min-height:44px"><input type="checkbox" id="show-past" style="width:22px;height:22px"> Show past events</label>
+<div id="cal-list" aria-live="polite"><p class="muted">Loading events…</p></div>
+</div>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/site-data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/calendar.js"></script>
+</body>
+</html>
