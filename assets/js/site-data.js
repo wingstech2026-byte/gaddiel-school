@@ -19,7 +19,7 @@ window.SITE = {
   mottoMeaning: "Helping every child do better",
 
   /* Website address once it is live (no slash at the end) */
-  siteUrl: "https://gaddiel-school.netlify.app", // [PLACEHOLDER] real web address
+  siteUrl: "https://gaddiel-school.vercel.app", // [PLACEHOLDER] real web address
 
   address: {
     street: "143 Fort Street",

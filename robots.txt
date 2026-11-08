@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gaddiel-school.netlify.app/sitemap.xml
+Sitemap: https://gaddiel-school.vercel.app/sitemap.xml

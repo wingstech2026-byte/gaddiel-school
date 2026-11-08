@@ -146,33 +146,31 @@ Both the Contact form and the Admissions enquiry form will then send messages to
 
 ---
 
-## 9. Publish the site free on Netlify
+## 9. Publish the site free on Vercel
 
-**Before you start:** the website is everything in this folder **except** the original photos, videos and the Word document at the top level. Make a new folder (e.g. `Gaddiel website`) and copy these into it:
+The website lives in a GitHub repository, and Vercel publishes it from there. Every time a change is saved to GitHub, Vercel updates the live site by itself within about a minute.
 
-```
-index.html  about.html  programmes.html  school-life.html  admissions.html
-calendar.html  support.html  news.html  contact.html  404.html
-favicon.ico  apple-touch-icon.png  robots.txt  sitemap.xml  netlify.toml
-README.md  assets/   (the whole folder)
-```
+Only the website files are kept on GitHub. The original photos, videos and the Word document in the top folder are left out on purpose (see `.gitignore`).
 
-Then:
+**First time:**
 
-1. Go to <https://app.netlify.com/drop> and create a free account.
-2. Drag the `Gaddiel website` folder onto the page. After a few seconds you get a web address like `https://random-name.netlify.app`.
-3. Under **Site configuration → Change site name**, choose e.g. `gaddiel-school`, so the address becomes `https://gaddiel-school.netlify.app`.
-4. If your address is different from `https://gaddiel-school.netlify.app`, use your editor's "Replace in files" (Ctrl+Shift+H in VS Code) to replace it everywhere, then upload again.
-5. **To update the site later:** open the site in Netlify → **Deploys**, then drag the folder onto the "Drag and drop" box again.
+1. Go to <https://vercel.com/signup> and choose **Continue with GitHub**, using the school's GitHub account.
+2. Click **Add New… → Project**, find the `gaddiel-school` repository and click **Import**.
+3. Leave every setting as it is (Framework Preset: **Other**, no build command) and click **Deploy**.
+4. After a few seconds you get a web address like `https://gaddiel-school.vercel.app`.
+5. If your address is different from `https://gaddiel-school.vercel.app`, use your editor's "Replace in files" (Ctrl+Shift+H in VS Code) to replace it everywhere, then save the change to GitHub (see below).
 
-Optional: a custom address such as `gaddielschool.org` can be bought and connected under **Domain management**.
+**To update the site later:**
+
+- **Easiest:** open the file on github.com, click the pencil icon, make your change and click **Commit changes**. Vercel updates the site automatically.
+- **From VS Code:** open the **Source Control** panel, type a short note (e.g. "Add Carol Service date"), click **Commit**, then **Sync Changes**.
+
+Optional: a custom address such as `gaddielschool.org` can be bought and connected in Vercel under **Project → Settings → Domains**.
 
 **After publishing:**
 - Add the website address to the school's Facebook page and Google Business Profile.
 - In Google Search Console (<https://search.google.com/search-console>), add the site and submit `sitemap.xml`.
 - Test how a shared link looks on Facebook with <https://developers.facebook.com/tools/debug/>.
-
-**GitHub Pages instead?** It also works. The only difference is that `404.html` uses `<base href="/">`. If the site lives at `username.github.io/gaddiel/`, change that line to `<base href="/gaddiel/">`.
 
 ---
 
