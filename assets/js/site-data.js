@@ -81,6 +81,25 @@ window.SITE = {
     { name: "Ms. Rachael Cole", role: "Administrator / Teacher", photo: "assets/img/placeholder-staff.svg" }
   ],
 
+  /* DIRECTOR'S WELCOME (Home page pop-up). Each paragraph is one line in quotes.
+     [DRAFT] This letter was drafted from the school's approved wording.
+     The Director should read it, change anything, then set draft: false */
+  directorWelcome: {
+    draft: true,
+    name: "Ms. Christiana R. M. Cole",
+    role: "Director",
+    photo: "assets/img/director.jpg",
+    teaser: "When we opened our doors on 13 September 2021 we had just three pupils. Today, by God’s grace, we have 98.",
+    greeting: "Dear parents, families and friends,",
+    paragraphs: [
+      "Welcome to Gaddiel Nursery & Preparatory School. When we opened our doors on 13 September 2021, we had just three pupils, one teacher, a helper and a maintenance worker. Today, by God’s grace, we have 98 pupils and a dedicated team of six teachers, a helper and a maintenance worker.",
+      "Our motto, “Ep All Pikin Dem Fo Betteh”, is our promise to you: we are here to help every child, not just a few, grow in knowledge, confidence and good character.",
+      "Our small classes mean every child is known by name, taught with patience and encouraged to reach their full potential. We follow each child’s progress and behaviour closely, and we keep parents informed.",
+      "We would love to welcome you and your child. Please come and visit us at 143 Fort Street, Monday to Friday, 8:00 AM to 3:00 PM."
+    ],
+    signoff: "God bless you,"
+  },
+
   /* PARENT REVIEWS (Home page) - use real quotes, with permission */
   reviews: [
     { quote: "[PLACEHOLDER] A short quote from a parent, used with their permission.", name: "[PLACEHOLDER] Parent of a Nursery pupil" },

@@ -438,10 +438,59 @@
       '<a class="btn btn--whatsapp" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent(text) + '">' + I.whatsapp + "Share on WhatsApp</a>";
   }
 
+  /* ---------- Director's welcome pop-up ---------- */
+  function directorWelcome() {
+    var btns = $$("[data-open-director]"), d = S.directorWelcome;
+    if (!btns.length || !d) return;
+    var dlg = document.createElement("dialog");
+    dlg.className = "director-dialog";
+    dlg.setAttribute("aria-labelledby", "dw-title");
+    dlg.innerHTML = '<button class="dlg-close" type="button" aria-label="Close the welcome letter">&times;</button>' +
+      '<div class="dlg-head"><img src="' + esc(d.photo) + '" alt="" width="84" height="105"><div><p class="eyebrow">A welcome from our Director</p><h2 id="dw-title">Welcome to Gaddiel</h2></div></div>' +
+      (d.draft ? '<p class="placeholder-note">[DRAFT] This letter is waiting for the Director’s approval.</p>' : "") +
+      "<p>" + esc(d.greeting) + "</p>" +
+      (d.paragraphs || []).map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("") +
+      "<p>" + esc(d.signoff) + "<br><strong>" + esc(d.name) + "</strong><br>" + esc(d.role) + ", " + esc(S.name) + "</p>";
+    document.body.appendChild(dlg);
+    var opener = null;
+    function onClose() { document.body.style.overflow = ""; if (opener) opener.focus(); }
+    function close() { if (dlg.close) dlg.close(); else { dlg.removeAttribute("open"); onClose(); } }
+    dlg.addEventListener("close", onClose);
+    $(".dlg-close", dlg).addEventListener("click", close);
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        opener = b;
+        document.body.style.overflow = "hidden";
+        if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+        $(".dlg-close", dlg).focus();
+      });
+    });
+  }
+
+  /* ---------- "On this page" bar: highlight the section in view ---------- */
+  function subnav() {
+    var bar = $(".subnav");
+    if (!bar || !("IntersectionObserver" in window)) return;
+    var links = $$("a", bar), map = {};
+    links.forEach(function (a) { var t = document.getElementById(a.getAttribute("href").slice(1)); if (t) map[t.id] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) { a.classList.remove("active"); a.removeAttribute("aria-current"); });
+        var a = map[en.target.id];
+        a.classList.add("active"); a.setAttribute("aria-current", "location");
+        var wrap = a.parentNode; // keep the active link visible on narrow screens
+        if (a.offsetLeft < wrap.scrollLeft || a.offsetLeft + a.offsetWidth > wrap.scrollLeft + wrap.clientWidth) wrap.scrollLeft = a.offsetLeft - 16;
+      });
+    }, { rootMargin: "-140px 0px -60% 0px" });
+    Object.keys(map).forEach(function (id) { io.observe(document.getElementById(id)); });
+  }
+
   /* ---------- Start ---------- */
   renderHeader();
   renderFooter();
   reviews(); staff(); enrolmentChart(); progressStory(); donationNeeds(); share();
   bindData();
-  counters(); reveal(); maps(); lightbox(); forms(); upcoming();
+  counters(); reveal(); maps(); lightbox(); forms(); upcoming(); directorWelcome(); subnav();
 })();

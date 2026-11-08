@@ -40,6 +40,8 @@ Search the project for the word `PLACEHOLDER` to find every one. They are:
 | Parent reviews | `site-data.js` → `reviews` | 2–3 short real quotes, **with the parents' permission** |
 | Website address | `site-data.js` → `siteUrl`, plus every `.html` file, `sitemap.xml` and `robots.txt` | the real address once the site is live (see section 9) |
 | Admission requirements | `admissions.html` (yellow box) | ages, documents to bring, fees, when forms are available |
+| Director’s welcome letter | `site-data.js` → `directorWelcome` | a **draft** written from the approved wording. The Director should read and edit it, then change `draft: true` to `draft: false` to remove the yellow DRAFT note |
+| FAQ answers for ages and fees | `admissions.html` → "Questions parents often ask" | search for `[PLACEHOLDER]` in the FAQ section |
 | Phone and email for Google | `index.html` and `contact.html`, in the block that starts `<script type="application/ld+json">` | same phone and email as above |
 | Term dates and event dates | `assets/data/calendar.json` | the school's real dates (see section 4) |
 | Staff photo for Ms. Rachael Cole | `assets/img/placeholder-staff.svg` | see section 6 |
@@ -142,7 +144,7 @@ Leave everything inside `< >` alone. The menu and footer are the same on every p
 4. In `assets/js/site-data.js`, set `formspreeId: "xyzabcd",`
 5. Publish the site, send a test message from the Contact page, and confirm the email in Formspree the first time.
 
-Both the Contact form and the Admissions enquiry form will then send messages to the school's email. Each form checks the fields before sending, shows a thank-you message, and has a hidden "honeypot" field that catches spam robots.
+The Contact form, the Admissions enquiry form and the Home page “Stay in touch” sign-up will then all send messages to the school's email. Each form checks the fields before sending, shows a thank-you message, and has a hidden "honeypot" field that catches spam robots.
 
 ---
 

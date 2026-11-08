@@ -31,7 +31,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 12px); }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 64px); }
 body {
   margin: 0; background: var(--white); color: var(--text);
   font-family: var(--font-body); font-size: 1.125rem; line-height: 1.65;
@@ -84,8 +84,8 @@ ul { padding-left: 1.2em; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* Header */
-#site-header { min-height: var(--header-h); }
-.site-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--grey-200); }
+#site-header { min-height: var(--header-h); position: sticky; top: 0; z-index: 100; }
+.site-header { position: relative; background: rgba(255,255,255,.97); border-bottom: 1px solid var(--grey-200); }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; min-height: var(--header-h); gap: 12px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--blue-900); min-width: 0; }
 .brand img { width: 50px; height: 50px; flex: none; }
@@ -410,3 +410,84 @@ body { padding-bottom: 70px; }
 .bar, .bar-labels span { min-width: 0; }
 .bar:first-child .tip { left: 0; transform: none; }
 .bar:last-child .tip { left: auto; right: 0; transform: none; }
+
+/* ===== Ideas adapted from friendly preschool websites ===== */
+
+/* Hand-drawn doodles + scroll cue in the hero */
+.hero { position: relative; }
+.hero .wrap { position: relative; z-index: 1; }
+.doodles { display: none; }
+@media (min-width: 900px) {
+  .doodles { display: block; }
+  .doodle { position: absolute; pointer-events: none; }
+  .doodle-kite { width: 54px; right: 3%; top: 20px; transform: rotate(14deg); }
+  .doodle-sun { width: 64px; left: 2%; top: 22px; }
+  .doodle-stars { width: 80px; left: 44%; bottom: 26px; }
+}
+.scroll-cue { display: grid; place-items: center; width: 50px; height: 50px; margin: 28px auto 0; border-radius: 50%; border: 2px solid var(--blue-700); color: var(--blue-700); background: #fff; position: relative; z-index: 1; animation: cue 2.2s ease-in-out infinite; }
+.scroll-cue svg { width: 24px; height: 24px; }
+.scroll-cue:hover { background: var(--sky-100); }
+@keyframes cue { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+/* Director's welcome */
+.director { display: grid; gap: 28px; align-items: center; }
+.director > img { width: 220px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 28px 28px 28px 90px; box-shadow: var(--shadow); margin: 0 auto; }
+@media (min-width: 760px) { .director { grid-template-columns: 280px 1fr; gap: 48px; } .director > img { width: 100%; } }
+.director-dialog { width: calc(100% - 24px); max-width: 640px; max-height: calc(100vh - 32px); overflow: auto; border: 0; border-radius: var(--radius); padding: 28px 22px 20px; box-shadow: 0 20px 60px rgba(0,0,0,.3); color: var(--text); }
+.director-dialog::backdrop { background: rgba(8, 18, 40, .72); }
+@media (min-width: 700px) { .director-dialog { padding: 36px 40px 28px; } }
+.dlg-close { position: absolute; top: 10px; right: 10px; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--grey-100); color: var(--blue-900); font-size: 1.7rem; line-height: 1; cursor: pointer; }
+.dlg-close:hover { background: var(--sky-100); }
+.dlg-head { display: flex; gap: 16px; align-items: center; margin: 0 40px 16px 0; }
+.dlg-head img { width: 84px; height: 105px; object-fit: cover; border-radius: 14px; flex: none; }
+.dlg-head h2 { margin: 0; font-size: 1.6rem; }
+.dlg-head .eyebrow { margin-bottom: 6px; }
+
+/* Full-width photo band with the motto */
+.photo-band { position: relative; overflow: hidden; display: grid; place-items: center; text-align: center; min-height: 320px; }
+.photo-band-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.photo-band::after { content: ""; position: absolute; inset: 0; background: rgba(13, 42, 92, .66); }
+.photo-band .wrap { position: relative; z-index: 1; padding-top: 72px; padding-bottom: 72px; }
+.photo-band-quote { font-family: var(--font-head); font-weight: 600; font-size: clamp(2rem, 6.5vw, 3.6rem); color: #fff; line-height: 1.15; margin: 0 0 .3em; }
+.photo-band-sub { color: #e3eefb; font-size: 1.2rem; margin: 0; }
+
+/* Admissions block with icon cards */
+.adm-head { display: grid; gap: 18px; margin-bottom: 28px; align-items: end; }
+.adm-head h2 { margin-bottom: .3em; }
+.adm-head p { margin: 0; }
+@media (min-width: 820px) { .adm-head { grid-template-columns: 1fr auto; } }
+.card--link { display: block; text-decoration: none; color: inherit; transition: transform .2s, box-shadow .2s, border-color .2s; }
+.card--link:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--sky-200); color: inherit; }
+.card--link h3::after { content: " \2192"; color: var(--gold-dark); }
+
+/* Explore photo tiles */
+.tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (min-width: 960px) { .tiles { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+.tile { position: relative; display: block; overflow: hidden; border-radius: var(--radius); aspect-ratio: 4 / 5; text-decoration: none; background: var(--sky-100); }
+.tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,42,92,0) 45%, rgba(13,42,92,.88)); }
+.tile span { position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 1; color: #fff; font-family: var(--font-head); font-weight: 600; font-size: clamp(1.05rem, 3.6vw, 1.35rem); line-height: 1.2; }
+.tile:hover img { transform: scale(1.05); }
+
+/* "On this page" bar on inner pages */
+.subnav { position: sticky; top: var(--header-h); z-index: 80; background: var(--grey-100); border-bottom: 1px solid var(--grey-200); }
+.subnav .wrap { display: flex; gap: 6px; overflow-x: auto; padding-top: 8px; padding-bottom: 8px; scrollbar-width: none; }
+.subnav .wrap::-webkit-scrollbar { display: none; }
+.subnav a { flex: none; display: inline-flex; align-items: center; min-height: 42px; padding: 6px 16px; border-radius: 99px; text-decoration: none; font-weight: 600; font-size: 1rem; color: var(--grey-800); }
+.subnav a:hover { background: #fff; color: var(--blue-700); }
+.subnav a.active { background: var(--blue-700); color: #fff; }
+
+/* FAQ accordion */
+.faq-item { background: #fff; border: 1px solid var(--grey-200); border-radius: 14px; margin-bottom: 10px; }
+.faq-item summary { list-style: none; cursor: pointer; position: relative; padding: 16px 56px 16px 20px; min-height: 58px; display: flex; align-items: center; font-weight: 700; color: var(--blue-900); }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; background: var(--sky-100); color: var(--blue-700); display: grid; place-items: center; font-size: 1.3rem; }
+.faq-item[open] summary::after { content: "\2212"; background: var(--gold); color: var(--blue-900); }
+.faq-item p { margin: 0; padding: 0 20px 18px; color: var(--muted); }
+
+/* Stay in touch sign-up */
+.signup { display: grid; gap: 24px; align-items: center; }
+@media (min-width: 900px) { .signup { grid-template-columns: 1fr 1.3fr; gap: 48px; } }
+.signup p { color: #dce9f8; }
+.section--blue .eyebrow { background: rgba(255,255,255,.14); color: #fff; }
+.signup .form-card { color: var(--text); }
