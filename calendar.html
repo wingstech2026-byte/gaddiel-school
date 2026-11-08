@@ -40,9 +40,12 @@
 <section class="section">
 <div class="wrap" id="calendar-app">
 <p class="placeholder-note">Dates marked “Date to be confirmed” may change. Tap “Add to my calendar” to save an event on your phone.</p>
-<div class="view-tabs" role="tablist" aria-label="Calendar view" style="margin-top:20px">
+<div class="cal-tools" style="margin-top:20px">
+<div class="view-tabs" role="tablist" aria-label="Calendar view">
 <button type="button" role="tab" id="tab-month" aria-controls="view-month" aria-selected="true" data-view="month">Month view</button>
 <button type="button" role="tab" id="tab-list" aria-controls="view-list" aria-selected="false" data-view="list" tabindex="-1">List view</button>
+</div>
+<button class="btn btn--outline" type="button" id="cal-print">Print or save as PDF</button>
 </div>
 
 <div id="view-month" role="tabpanel" aria-labelledby="tab-month">
@@ -57,7 +60,7 @@
 </div>
 
 <div id="view-list" role="tabpanel" aria-labelledby="tab-list" hidden>
-<label style="display:inline-flex;gap:10px;align-items:center;font-weight:600;min-height:44px"><input type="checkbox" id="show-past" style="width:22px;height:22px"> Show past events</label>
+<label class="past-toggle" style="display:inline-flex;gap:10px;align-items:center;font-weight:600;min-height:44px"><input type="checkbox" id="show-past" style="width:22px;height:22px"> Show past events</label>
 <div id="cal-list" aria-live="polite"><p class="muted">Loading events…</p></div>
 </div>
 </div>

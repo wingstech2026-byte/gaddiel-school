@@ -101,7 +101,16 @@
   document.getElementById("show-past").addEventListener("change", renderList);
 
   // phones start on the easier list view
-  setView(window.matchMedia("(max-width: 699px)").matches ? "list" : "month");
+  setView(/[?&]view=list/.test(location.search) || window.matchMedia("(max-width: 699px)").matches ? "list" : "month");
+
+  // "Print or save as PDF" prints the list of upcoming events
+  var printBtn = document.getElementById("cal-print");
+  if (printBtn) printBtn.addEventListener("click", function () {
+    setView("list");
+    document.getElementById("show-past").checked = false;
+    renderList();
+    setTimeout(function () { window.print(); }, 50);
+  });
 
   G.loadCalendar().then(function (evs) {
     events = evs;

@@ -13,6 +13,10 @@ It is made of plain files. There is nothing to install and no "build" step.
 | Term dates, holidays and events | `assets/data/calendar.json` |
 | News stories | `assets/data/news.json` |
 | Photos | `assets/img/` |
+| Teachers and support staff | `assets/js/site-data.js` → `teachers`, `supportStaff` |
+| Printable admission form and fees list | `assets/docs/` |
+| Video | `assets/video/` |
+| Krio page | `krio.html` |
 | Words on a page | the page's `.html` file (for example `about.html`) |
 | Colours and fonts | `assets/css/style.css` |
 
@@ -41,6 +45,11 @@ Search the project for the word `PLACEHOLDER` to find every one. They are:
 | Website address | `site-data.js` → `siteUrl`, plus every `.html` file, `sitemap.xml` and `robots.txt` | the real address once the site is live (see section 9) |
 | Admission requirements | `admissions.html` (yellow box) | ages, documents to bring, fees, when forms are available |
 | Director’s welcome letter | `site-data.js` → `directorWelcome` | a **draft** written from the approved wording. The Director should read and edit it, then change `draft: true` to `draft: false` to remove the yellow DRAFT note |
+| Teachers’ names, classes, introductions and photos | `site-data.js` → `teachers` and `supportStaff` | the six teachers, the helper and the maintenance worker (see section 11) |
+| Developer WhatsApp | `site-data.js` → `developer.whatsapp` | the developer’s WhatsApp number, digits only (the credit at the bottom of each page shows it once added) |
+| Fees list | `assets/docs/gaddiel-fees.pdf` | replace with the real fees (see section 12) |
+| Documents to bring | `assets/docs/gaddiel-admission-form.pdf`, section 3 | replace the PDF with the school’s own version once the list is confirmed |
+| Krio page | `krio.html` | a **draft**. Ask a fluent Krio speaker to check it, then remove the yellow DRAFT box |
 | FAQ answers for ages and fees | `admissions.html` → "Questions parents often ask" | search for `[PLACEHOLDER]` in the FAQ section |
 | Phone and email for Google | `index.html` and `contact.html`, in the block that starts `<script type="application/ld+json">` | same phone and email as above |
 | Term dates and event dates | `assets/data/calendar.json` | the school's real dates (see section 4) |
@@ -144,7 +153,7 @@ Leave everything inside `< >` alone. The menu and footer are the same on every p
 4. In `assets/js/site-data.js`, set `formspreeId: "xyzabcd",`
 5. Publish the site, send a test message from the Contact page, and confirm the email in Formspree the first time.
 
-The Contact form, the Admissions enquiry form and the Home page “Stay in touch” sign-up will then all send messages to the school's email. Each form checks the fields before sending, shows a thank-you message, and has a hidden "honeypot" field that catches spam robots.
+The Contact form, the Admissions enquiry form, the **Apply online** form and the Home page “Stay in touch” sign-up will then all send messages to the school's email. Each form checks the fields before sending, shows a thank-you message, and has a hidden "honeypot" field that catches spam robots.
 
 ---
 
@@ -193,3 +202,67 @@ Photos were renamed, resized and compressed into `assets/img/`. Location data wa
 - The **outdoor slide and playground photos** are captioned as **Family Day**.
 
 To change a caption, edit the `alt="..."` text in `school-life.html`.
+
+---
+
+## 11. Our staff page (`teachers.html`)
+
+The page shows three groups, all from `assets/js/site-data.js`:
+
+- **Leadership**: the `staff` list (Proprietress, Director, Ms. Rachael Cole)
+- **Teachers**: the `teachers` list
+- **Support staff**: the `supportStaff` list
+
+For each person, change `name`, `role` (e.g. `"Nursery 2 teacher"`), `intro` (one or two sentences) and `photo`. Save a portrait photo (about 480 pixels wide, under 60 KB) in `assets/img/`, e.g. `teacher-mary.jpg`, and write `photo: "assets/img/teacher-mary.jpg"`. Ask each person for permission first.
+
+---
+
+## 12. Downloads (PDF files)
+
+The Admissions page links to two printable files in `assets/docs/`:
+
+- `gaddiel-admission-form.pdf`: a blank admission form to print and fill in
+- `gaddiel-fees.pdf`: a **template** for fees and uniform prices, with [PLACEHOLDER] in every price
+
+To replace one: make your own version in Word (or Google Docs), choose **File → Save as → PDF**, and save it over the old file with **exactly the same name**. Keep each PDF under about 500 KB so parents can download it on mobile data.
+
+The school calendar does not need a PDF: on the Calendar page, the **Print or save as PDF** button always prints the latest dates.
+
+---
+
+## 13. Video
+
+The School Life page has one short video, `assets/video/musical-chairs.mp4` (12 seconds, about 0.8 MB). It only downloads when someone presses play, so it doesn’t use visitors’ data otherwise.
+
+To add another video, keep it **short (under 30 seconds) and small (under 2 MB)**. Phone videos are usually much bigger, so compress them first, for example with the free app HandBrake (preset “Very Fast 480p30”). Put it in `assets/video/`, then copy the `<video>…</video>` block in `school-life.html` and change both file names. The `poster` is a still picture shown before the video plays.
+
+---
+
+## 14. Apply online
+
+`apply.html` is the full online admission form. It asks for the child’s details, the parent’s details and an emergency contact, and it needs a tick to confirm. Applications arrive by email through Formspree (section 8), with the subject “New admission application”.
+
+---
+
+## 15. Krio page
+
+`krio.html` gives the welcome, why families choose Gaddiel, how to enrol, the uniform and the hours in Krio. It is linked from the Home page (“Rid am na Krio”), the phone menu and the footer. The wording is a **first draft**. Please ask a fluent Krio speaker to check it, then delete the yellow box that starts `[DRAFT]`.
+
+---
+
+## 16. Offline mode
+
+Pages that a visitor has opened are saved on their phone, so the site still opens with no mobile data. If someone opens a page they have never visited while offline, a friendly “You are offline” page appears. This is done by `sw.js`. You don’t need to touch it, and changes you publish still show straight away.
+
+Only if you **rename or delete a page or script**: open `sw.js`, update the list near the top, and change `gnaps-v1` to `gnaps-v2`.
+
+---
+
+## 17. Visitor statistics
+
+The site is ready for **Vercel Web Analytics** (free, no cookies, no pop-up needed). To switch it on:
+
+1. Open the project on <https://vercel.com>.
+2. Click the **Analytics** tab, then **Enable**.
+3. Visits start appearing within a few minutes. You can see the number of visitors, the most popular pages, and which countries and devices people use.
+

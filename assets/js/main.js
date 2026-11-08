@@ -85,7 +85,7 @@
       '<span class="brand-text"><span class="brand-name">Gaddiel</span><span class="brand-sub">Nursery &amp; Preparatory School</span></span></a>' +
       '<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">' + I.menu + "<span>Menu</span></button>" +
       '<nav class="site-nav" id="site-nav" aria-label="Main"><ul>' + items +
-      '<li class="nav-cta"><a href="support.html"' + (page === "support.html" ? ' aria-current="page"' : "") + ">Support our school</a></li></ul></nav>" +
+      '<li class="nav-lang"><a href="krio.html" lang="kri" hreflang="kri">Na Krio</a></li><li class="nav-cta"><a href="support.html"' + (page === "support.html" ? ' aria-current="page"' : "") + ">Support our school</a></li></ul></nav>" +
       "</div></header>";
 
     var btn = $(".nav-toggle", host), nav = $("#site-nav");
@@ -107,6 +107,15 @@
   function hoursRows() {
     return (S.hours || []).map(function (h) { return "<tr><th scope=\"row\">" + esc(h.days) + "</th><td>" + esc(h.time) + "</td></tr>"; }).join("");
   }
+  function devCredit() {
+    var d = S.developer;
+    if (!d || !d.name) return "";
+    var bits = ["Website developed by <strong>" + esc(d.name) + "</strong>"];
+    if (!isPH(d.email)) bits.push('<a href="mailto:' + esc(d.email) + '">' + esc(d.email) + "</a>");
+    if (!isPH(d.whatsapp)) bits.push('<a href="https://wa.me/' + String(d.whatsapp).replace(/\D/g, "") + '" target="_blank" rel="noopener">WhatsApp</a>');
+    return '<p class="dev-credit">' + bits.join(" · ") + "</p>";
+  }
+
   function renderFooter() {
     var host = $("#site-footer");
     if (!host) return;
@@ -118,7 +127,7 @@
       "<p>" + esc(a.street) + ", " + esc(a.city) + "<br>" + esc(a.country) + ", " + esc(a.region) + "</p></div>" +
       '<div><h2>Explore</h2><ul class="footer-list">' +
       NAV.slice(1).map(function (n) { return '<li><a href="' + n[0] + '">' + n[1] + "</a></li>"; }).join("") +
-      '<li><a href="support.html">Support our school</a></li></ul></div>' +
+      '<li><a href="support.html">Support our school</a></li><li><a href="apply.html">Apply online</a></li><li><a href="teachers.html">Our staff</a></li><li><a href="krio.html" lang="kri" hreflang="kri">Na Krio</a></li></ul></div>' +
       '<div><h2>Contact</h2><ul class="footer-list">' +
       '<li><a data-href="tel" href="#">' + esc(S.phone) + "</a></li>" +
       '<li><a data-href="email" href="#">' + esc(S.email) + "</a></li>" +
@@ -132,6 +141,7 @@
       "</div>" +
       '<div class="footer-bottom"><span>© ' + new Date().getFullYear() + " " + esc(S.name) + ". Founded " + esc(S.founded) + ".</span>" +
       "<span>“Train up a child in the way he should go.” Proverbs 22:6</span></div>" +
+      devCredit() +
       "</div></footer>" +
       '<div class="mobile-bar" role="region" aria-label="Quick contact">' +
       '<a class="btn btn--gold" data-href="tel" href="#">' + I.phone + "Call now</a>" +
@@ -261,7 +271,7 @@
 
       function msgFor(f) {
         var v = f.validity, label = (f.getAttribute("data-label") || "This field");
-        if (v.valueMissing) return label + " is required.";
+        if (v.valueMissing) return f.getAttribute("data-required-msg") || label + " is required.";
         if (v.typeMismatch && f.type === "email") return "Please enter a valid email address, like name@example.com.";
         if (v.patternMismatch) return f.getAttribute("data-pattern-msg") || "Please check this field.";
         if (v.tooShort) return label + " is too short.";
@@ -400,6 +410,14 @@
       return '<div class="card staff-card"><img src="' + esc(p.photo) + '" alt="' + esc(p.name + ", " + p.role) + '" width="150" height="180" loading="lazy"><h3>' + esc(p.name) + "</h3><p>" + esc(p.role) + "</p></div>";
     }).join("");
   }
+  function people(id, list) {
+    var box = $("#" + id);
+    if (!box) return;
+    box.innerHTML = (list || []).map(function (p) {
+      return '<div class="card staff-card"><img src="' + esc(p.photo) + '" alt="' + esc(isPH(p.name) ? "Photo coming soon" : p.name + ", " + p.role) + '" width="150" height="180" loading="lazy"><h3>' + esc(p.name) + "</h3><p>" + esc(p.role) + "</p>" + (p.intro ? '<p class="intro">' + esc(p.intro) + "</p>" : "") + "</div>";
+    }).join("");
+  }
+
   function enrolmentChart() {
     var box = $("#enrolment-chart");
     if (!box) return;
@@ -490,7 +508,21 @@
   /* ---------- Start ---------- */
   renderHeader();
   renderFooter();
-  reviews(); staff(); enrolmentChart(); progressStory(); donationNeeds(); share();
+  reviews(); staff(); people("teachers", S.teachers); people("support-staff", S.supportStaff); enrolmentChart(); progressStory(); donationNeeds(); share();
   bindData();
   counters(); reveal(); maps(); lightbox(); forms(); upcoming(); directorWelcome(); subnav();
+
+  /* ---------- Offline mode: save visited pages on the phone ---------- */
+  var host = location.hostname, local = host === "localhost" || host === "127.0.0.1";
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || local)) {
+    window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });
+  }
+
+  /* ---------- Visitor statistics (Vercel Web Analytics, no cookies) ---------- */
+  if (!local && location.protocol === "https:") {
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    var va = document.createElement("script");
+    va.defer = true; va.src = "/_vercel/insights/script.js";
+    document.head.appendChild(va);
+  }
 })();

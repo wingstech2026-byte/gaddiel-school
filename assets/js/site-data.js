@@ -100,6 +100,21 @@ window.SITE = {
     signoff: "God bless you,"
   },
 
+  /* TEACHERS (Our staff page). Replace each [PLACEHOLDER] with the real
+     name, class and a short introduction. Photos go in assets/img/ */
+  teachers: [
+    { name: "[PLACEHOLDER] Teacher 1 name", role: "[PLACEHOLDER] Class taught", intro: "[PLACEHOLDER] One or two sentences: how long they have taught and what they love about teaching.", photo: "assets/img/placeholder-staff.svg" },
+    { name: "[PLACEHOLDER] Teacher 2 name", role: "[PLACEHOLDER] Class taught", intro: "[PLACEHOLDER] One or two sentences about this teacher.", photo: "assets/img/placeholder-staff.svg" },
+    { name: "[PLACEHOLDER] Teacher 3 name", role: "[PLACEHOLDER] Class taught", intro: "[PLACEHOLDER] One or two sentences about this teacher.", photo: "assets/img/placeholder-staff.svg" },
+    { name: "[PLACEHOLDER] Teacher 4 name", role: "[PLACEHOLDER] Class taught", intro: "[PLACEHOLDER] One or two sentences about this teacher.", photo: "assets/img/placeholder-staff.svg" },
+    { name: "[PLACEHOLDER] Teacher 5 name", role: "[PLACEHOLDER] Class taught", intro: "[PLACEHOLDER] One or two sentences about this teacher.", photo: "assets/img/placeholder-staff.svg" },
+    { name: "[PLACEHOLDER] Teacher 6 name", role: "[PLACEHOLDER] Class taught", intro: "[PLACEHOLDER] One or two sentences about this teacher.", photo: "assets/img/placeholder-staff.svg" }
+  ],
+  supportStaff: [
+    { name: "[PLACEHOLDER] Name", role: "Helper", intro: "Helps our youngest pupils through the school day.", photo: "assets/img/placeholder-staff.svg" },
+    { name: "[PLACEHOLDER] Name", role: "Maintenance worker", intro: "Keeps our school clean, safe and in good repair.", photo: "assets/img/placeholder-staff.svg" }
+  ],
+
   /* PARENT REVIEWS (Home page) - use real quotes, with permission */
   reviews: [
     { quote: "[PLACEHOLDER] A short quote from a parent, used with their permission.", name: "[PLACEHOLDER] Parent of a Nursery pupil" },
@@ -119,5 +134,13 @@ window.SITE = {
   ],
 
   /* Text used when people share the Support page */
-  shareText: "In 2021, Gaddiel Nursery & Preparatory School started with just 3 pupils. Today we have 98! Help us keep growing and give every child in our community a strong start. Please give or share:"
+  shareText: "In 2021, Gaddiel Nursery & Preparatory School started with just 3 pupils. Today we have 98! Help us keep growing and give every child in our community a strong start. Please give or share:",
+
+  /* WEBSITE DEVELOPER (credit at the very bottom of every page).
+     WhatsApp: digits only with country code, e.g. "23276123456" */
+  developer: {
+    name: "Marrah",
+    email: "wingstech2026@gmail.com",
+    whatsapp: "[PLACEHOLDER developer WhatsApp]"
+  }
 };
