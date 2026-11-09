@@ -198,6 +198,37 @@
     els.forEach(function (e) { io.observe(e); });
   }
 
+  /* ---------- Scroll animation on every page ----------
+     Headings, text, cards and form sections slide up gently and fade in as they
+     come into view (once). Photos and buttons fade in. The top of each page
+     (hero) is animated by the stylesheet as soon as the page opens. */
+  function motion() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    var UP = "h1, h2, h3, p, ul, ol, dl, table, blockquote, fieldset, details, .card, .chart, .note-box, .placeholder-note, .stat, .map-box";
+    var FADE = "img, picture, figure, video, .btn, .gallery button";
+    var SKIP = ".hero, .page-hero, .reveal, dialog, [data-cal], .lightbox, .announcement, .form-status, .field, .choices, nav, .hp-field, [hidden]";
+    var picked = $$("main " + UP.split(", ").join(", main ") + ", main " + FADE.split(", ").join(", main ") + ", footer h2, footer h3, footer p, footer ul");
+    var set = new Set(picked), vh = window.innerHeight;
+    var els = picked.filter(function (el) {
+      if (el.closest(SKIP)) return false;
+      for (var a = el.parentElement; a && a !== document.body; a = a.parentElement) if (set.has(a)) return false; // animate a card as one piece
+      return el.getBoundingClientRect().top > vh * 0.9; // already on screen: leave as is (no flash)
+    });
+    els.forEach(function (el) { el.classList.add(el.matches(FADE) ? "m-fade" : "m-up"); });
+    var io = new IntersectionObserver(function (entries) {
+      var i = 0;
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        io.unobserve(el);
+        el.style.transitionDelay = Math.min(i++, 4) * 110 + "ms"; // items arriving together appear one after another
+        el.classList.add("m-in");
+        setTimeout(function () { el.classList.remove("m-up", "m-fade", "m-in"); el.style.transitionDelay = ""; }, 1700);
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    els.forEach(function (el) { io.observe(el); });
+  }
+
   /* ---------- Map: loads only when needed (saves mobile data) ---------- */
   function maps() {
     $$("[data-map]").forEach(function (box) {
@@ -282,23 +313,53 @@
         if (v.tooShort) return label + " is too short.";
         return "";
       }
+      // Radio buttons in one group share one error message (it belongs to the first button).
+      function group(f) { return f.type === "radio" ? $$('input[type=radio][name="' + f.name + '"]', form) : [f]; }
       function check(f) {
-        var err = document.getElementById(f.id + "-error");
+        var g = group(f), err = document.getElementById(g[0].id + "-error");
         var m = f.checkValidity() ? "" : msgFor(f);
-        f.setAttribute("aria-invalid", m ? "true" : "false");
+        if (f.disabled) m = "";
+        else if (f.type === "radio" && f.validity.valueMissing) m = /\?$/.test(f.getAttribute("data-label") || "") ? "Please answer this question." : "Please choose one: " + (f.getAttribute("data-label") || "an answer") + ".";
+        g.forEach(function (x) { x.setAttribute("aria-invalid", m ? "true" : "false"); });
         if (err) { err.textContent = m; err.classList.toggle("show", !!m); }
         return !m;
       }
       fields.forEach(function (f) {
+        if (f.type === "radio" || f.type === "checkbox") { f.addEventListener("change", function () { check(f); }); return; }
         f.addEventListener("blur", function () { if (f.value) check(f); });
         f.addEventListener("input", function () { if (f.getAttribute("aria-invalid") === "true") check(f); });
       });
+
+      // Sections that only appear after a certain answer, e.g. data-show-if="add_second_parent=Yes".
+      // Hidden sections are disabled, so they are not checked or sent.
+      var conds = $$("[data-show-if]", form);
+      function updateConds(animate, force) {
+        conds.forEach(function (c) {
+          var rule = c.getAttribute("data-show-if").split("="), on = false;
+          $$('[name="' + rule[0] + '"]', form).forEach(function (x) { if ((x.type === "radio" || x.type === "checkbox") ? x.checked && x.value === rule[1] : x.value === rule[1]) on = true; });
+          if (!force && on === !c.hidden) return;
+          c.hidden = !on;
+          $$("input, select, textarea", c).forEach(function (x) { x.disabled = !on; if (!on) { x.removeAttribute("aria-invalid"); var e = document.getElementById(x.id + "-error"); if (e) e.classList.remove("show"); } });
+          if (on && animate) { c.classList.remove("cond-in"); void c.offsetWidth; c.classList.add("cond-in"); }
+        });
+        // a closed section inside an open one stays switched off
+        conds.forEach(function (c) { if (c.hidden) $$("input, select, textarea", c).forEach(function (x) { x.disabled = true; }); });
+      }
+      if (conds.length) {
+        updateConds(false, true);
+        form.addEventListener("change", function () { updateConds(true); });
+        form.addEventListener("reset", function () { setTimeout(function () { updateConds(false, true); }, 0); });
+      }
 
       form.setAttribute("novalidate", "");
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         status.className = "form-status";
-        var bad = fields.filter(function (f) { return !check(f); });
+        var seen = {};
+        var bad = fields.filter(function (f) {
+          if (f.type === "radio") { if (seen[f.name]) return false; seen[f.name] = 1; }
+          return !check(f);
+        });
         if (bad.length) { bad[0].focus(); return; }
 
         var hp = $(".hp-field input", form);
@@ -611,6 +672,7 @@
   bindData();
   counters(); reveal(); maps(); lightbox(); forms(); upcoming(); directorWelcome(); subnav();
   announcement(); textSize(); installApp(); galleryFilters(); paymentMethods();
+  motion();
 
   /* ---------- Offline mode: save visited pages on the phone ---------- */
   var host = location.hostname, local = host === "localhost" || host === "127.0.0.1";

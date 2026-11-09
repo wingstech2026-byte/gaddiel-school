@@ -341,3 +341,16 @@ On the School Life page, the buttons above the photo gallery (**All, Classroom, 
 
 Every page has **A / A+ / A++** buttons, in the footer and in the phone menu, to make the text bigger. The choice is remembered on that phone.
 
+
+---
+
+## 25. Online application form and page animations
+
+**Application form (`apply.html`)** has five numbered parts: the child, parent or guardian 1, an optional second parent or guardian, the child's background, and anything else. Some parts only open after an answer:
+
+- **Home address → Different address** opens an address box.
+- **Add a second parent or guardian? → Yes** opens the second parent's details.
+
+Closed parts are not checked and not sent. The class choices (Nursery 1–3, Class 1–6) are the `<label class="choice">` lines in `apply.html`. Change them there if the school's class names are different. The form does not take photo uploads (the free Formspree plan does not allow them), so it asks parents to bring two passport photos and the birth certificate to the office.
+
+**Animations:** on every page, headings, text, cards and form sections slide up gently and fade in as you scroll to them. Photos and buttons fade in, and the top of each page plays as soon as it opens. Each item animates only once. Phones set to "reduce motion" see no animation. Nothing needs to be added to new pages; it is automatic (`motion()` in `assets/js/main.js`).
