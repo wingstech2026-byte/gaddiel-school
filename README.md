@@ -172,8 +172,8 @@ Only the website files are kept on GitHub. The original photos, videos and the W
 1. Go to <https://vercel.com/signup> and choose **Continue with GitHub**, using the school's GitHub account.
 2. Click **Add New… → Project**, find the `gaddiel-school` repository and click **Import**.
 3. Leave every setting as it is (Framework Preset: **Other**, no build command) and click **Deploy**.
-4. After a few seconds you get a web address like `https://gaddielschool.vercel.app`.
-5. If your address is different from `https://gaddielschool.vercel.app`, use your editor's "Replace in files" (Ctrl+Shift+H in VS Code) to replace it everywhere, then save the change to GitHub (see below).
+4. After a few seconds you get a web address like `https://www.gaddielschool.com`.
+5. If your address is different from `https://www.gaddielschool.com`, use your editor's "Replace in files" (Ctrl+Shift+H in VS Code) to replace it everywhere, then save the change to GitHub (see below).
 
 **To update the site later:**
 
@@ -276,7 +276,7 @@ The site is ready for **Vercel Web Analytics** (free, no cookies, no pop-up need
 
 Staff can add news, add or change calendar events, and switch the announcement banner on or off by filling in simple forms. Open:
 
-**https://gaddielschool.vercel.app/admin/** (use your real web address followed by `/admin/`)
+**https://www.gaddielschool.com/admin/** (use your real web address followed by `/admin/`)
 
 **One-time setup (about 5 minutes)**
 

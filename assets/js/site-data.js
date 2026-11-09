@@ -19,7 +19,7 @@ window.SITE = {
   mottoMeaning: "Helping every child do better",
 
   /* Website address once it is live (no slash at the end) */
-  siteUrl: "https://gaddielschool.vercel.app", // [PLACEHOLDER] real web address
+  siteUrl: "https://www.gaddielschool.com",
 
   address: {
     street: "143 Fort Street",

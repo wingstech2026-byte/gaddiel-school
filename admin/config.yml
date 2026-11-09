@@ -8,8 +8,8 @@ backend:
   commit_messages:
     update: "Update {{collection}} from the website editor"
 
-site_url: https://gaddielschool.vercel.app
-display_url: https://gaddielschool.vercel.app
+site_url: https://www.gaddielschool.com
+display_url: https://www.gaddielschool.com
 logo:
   src: /assets/img/logo.png
 
