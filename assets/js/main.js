@@ -93,7 +93,7 @@
       '<span class="brand-text"><span class="brand-name">Gaddiel' + slFlag() + '</span><span class="brand-sub">Nursery &amp; Preparatory School</span></span></a>' +
       '<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">' + I.menu + "<span>Menu</span></button>" +
       '<nav class="site-nav" id="site-nav" aria-label="Main"><ul>' + items +
-      '<li class="nav-textsize">' + textSizeHTML() + '</li><li class="nav-lang"><a href="krio.html" lang="kri" hreflang="kri">Na Krio</a></li><li class="nav-cta"><a href="support.html"' + (page === "support.html" ? ' aria-current="page"' : "") + ">Support our school</a></li></ul></nav>" +
+      '<li class="nav-textsize">' + textSizeHTML() + '</li><li class="nav-app"><a href="app.html">' + I.phone + 'Get the Gaddiel app</a></li><li class="nav-lang"><a href="krio.html" lang="kri" hreflang="kri">Na Krio</a></li><li class="nav-cta"><a href="support.html"' + (page === "support.html" ? ' aria-current="page"' : "") + ">Support our school</a></li></ul></nav>" +
       "</div></header>";
 
     var btn = $(".nav-toggle", host), nav = $("#site-nav");
@@ -156,7 +156,7 @@
       '<a data-href="reviews" href="#">' + I.star + "Google reviews</a>" +
       '<a data-href="gofundme" href="#">' + I.heart + "GoFundMe</a>" +
       '<a data-href="channel" href="#">' + I.whatsapp + "WhatsApp Channel</a></div>" +
-      '<button class="install-btn" type="button" hidden>' + I.phone + "Install the Gaddiel app</button>" +
+      '<a class="install-btn get-app-btn" href="app.html">' + I.phone + "Get the Gaddiel app</a>" +
       textSizeHTML() + "</div>" +
       "</div>" +
       '<div class="footer-bottom"><span>© ' + new Date().getFullYear() + " " + esc(S.name) + ". Founded " + esc(S.founded) + ".</span>" +
@@ -641,7 +641,7 @@
     var isIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
     var isAndroid = /android/i.test(ua);
     var standalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
-    var BTNS = ".install-btn, [data-install]";
+    var BTNS = "[data-install]"; // only the optional "add without downloading" button on the app page
 
     function showButtons(on) { $$(BTNS).forEach(function (b) { b.hidden = !on; }); }
     function markInstalled() {
@@ -659,8 +659,8 @@
       $$("[data-inapp]").forEach(function (el) { el.hidden = false; });
     }
     // The Android download does not work on iPhone: show the iPhone steps instead
+    // (the Download button itself always stays visible)
     if (isIOS) {
-      $$("[data-apk]").forEach(function (el) { el.hidden = true; el.style.display = "none"; });
       $$("[data-ios-only]").forEach(function (el) { el.hidden = false; });
     }
     if (standalone) markInstalled();

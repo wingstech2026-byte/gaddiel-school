@@ -724,3 +724,10 @@ html[data-text-size="2"] { font-size: 125%; }
 .app-ios-hint[hidden] { display: none; }
 .app-warn { margin: 0; background: #fff3cf; border: 2px solid #d99a00; color: #5c4100; border-radius: var(--radius-sm); padding: 10px 14px; }
 .app-warn[hidden] { display: none; }
+
+/* Always-visible "Get the app" links (phone menu + footer) */
+.get-app-btn { text-decoration: none; }
+.get-app-btn[hidden] { display: inline-flex; }
+.site-nav .nav-app a { display: flex; align-items: center; gap: 10px; margin-top: 6px; background: var(--sky-100); color: var(--blue-900); border-radius: 99px; font-weight: 700; justify-content: center; }
+.site-nav .nav-app svg { width: 20px; height: 20px; flex: none; }
+@media (min-width: 1180px) { .site-nav .nav-app { display: none; } }
