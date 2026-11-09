@@ -153,7 +153,7 @@ window.SITE = {
   /* WEBSITE DEVELOPER (credit at the very bottom of every page).
      WhatsApp: digits only with country code, e.g. "23276123456" */
   developer: {
-    name: "Marrah",
+    name: "Saio Alusine Marrah",
     email: "wingstech2026@gmail.com",
     whatsapp: "8619382020640",
     photo: "assets/img/developer.jpg"
