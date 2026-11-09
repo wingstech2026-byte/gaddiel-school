@@ -722,3 +722,5 @@ html[data-text-size="2"] { font-size: 125%; }
 .app-download { gap: 10px; }
 .app-download svg { flex: none; }
 .app-ios-hint[hidden] { display: none; }
+.app-warn { margin: 0; background: #fff3cf; border: 2px solid #d99a00; color: #5c4100; border-radius: var(--radius-sm); padding: 10px 14px; }
+.app-warn[hidden] { display: none; }

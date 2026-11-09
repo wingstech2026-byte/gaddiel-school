@@ -57,5 +57,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/download",
+      "destination": "/assets/app/gaddiel-school.apk",
+      "permanent": false
+    },
+    {
+      "source": "/app",
+      "destination": "/app.html",
+      "permanent": false
+    }
   ]
 }

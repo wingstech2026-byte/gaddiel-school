@@ -654,6 +654,10 @@
     // "Get the app" page: highlight the steps for this visitor's phone
     var mine = $('[data-os="' + (isIOS ? "ios" : isAndroid ? "android" : "") + '"]');
     if (mine) mine.classList.add("is-mine");
+    // In-app browsers (Facebook, Instagram, etc.) often block downloads: tell the visitor
+    if (/FBAN|FBAV|FB_IAB|Instagram|Line\/|Snapchat|TikTok|; wv\)/i.test(ua)) {
+      $$("[data-inapp]").forEach(function (el) { el.hidden = false; });
+    }
     // The Android download does not work on iPhone: show the iPhone steps instead
     if (isIOS) {
       $$("[data-apk]").forEach(function (el) { el.hidden = true; el.style.display = "none"; });
