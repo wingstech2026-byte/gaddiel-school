@@ -628,8 +628,8 @@ html[data-text-size="2"] { font-size: 125%; }
 
 /* Cotton Tree section (home page) */
 .rooted-grid { display: grid; gap: 28px; align-items: center; }
-.rooted-art { max-width: 380px; margin: 0 auto; }
-.rooted-art img { width: 100%; height: auto; filter: drop-shadow(0 10px 22px rgba(13,42,92,.18)); }
+.rooted-art { max-width: 520px; width: 100%; margin: 0 auto; }
+.rooted-art img { width: 100%; height: auto; }
 @media (min-width: 860px) { .rooted-grid { grid-template-columns: 1fr 1.2fr; gap: 56px; } }
 
 /* ===== Footer: wave edge and flying birds ===== */
