@@ -215,7 +215,7 @@
     var UP = "h1, h2, h3, p, ul, ol, dl, table, blockquote, fieldset, details, .card, .chart, .note-box, .placeholder-note, .stat, .map-box";
     var FADE = "img, picture, figure, video, .btn, .gallery button";
     var SKIP = ".hero, .page-hero, .reveal, .dev-credit, .footer-bottom, .footer-birds, dialog, [data-cal], .lightbox, .announcement, .form-status, .field, .choices, nav, .hp-field, [hidden]";
-    var picked = $$("main " + UP.split(", ").join(", main ") + ", main " + FADE.split(", ").join(", main ") + ", footer h2, footer h3, footer p, footer ul");
+    var picked = $$("main " + UP.split(", ").join(", main ") + ", main " + FADE.split(", ").join(", main ") + ", footer .footer-brand, footer h2, footer h3, footer p, footer ul");
     var set = new Set(picked), vh = window.innerHeight;
     var els = picked.filter(function (el) {
       if (el.closest(SKIP)) return false;
