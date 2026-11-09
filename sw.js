@@ -3,11 +3,11 @@
    so the site still opens when there is no mobile data.
    Staff do not need to edit this file. If you ever rename or remove one of
    the files in CORE below, update the list and change VERSION (e.g. v2). */
-var VERSION = "gnaps-v9";
+var VERSION = "gnaps-v10";
 var CORE = [
   "./", "index.html", "about.html", "programmes.html", "school-life.html",
   "admissions.html", "apply.html", "calendar.html", "support.html", "news.html",
-  "contact.html", "teachers.html", "krio.html", "fees.html", "offline.html", "manifest.webmanifest",
+  "contact.html", "teachers.html", "krio.html", "fees.html", "app.html", "offline.html", "manifest.webmanifest",
   "assets/css/style.css", "assets/js/site-data.js", "assets/js/main.js",
   "assets/js/calendar.js", "assets/js/news.js",
   "assets/data/calendar.json", "assets/data/news.json", "assets/data/announcement.json",

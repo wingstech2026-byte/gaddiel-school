@@ -144,7 +144,7 @@
       "<p>" + esc(a.street) + ", " + esc(a.city) + "<br>" + esc(a.country) + ", " + esc(a.region) + "</p></div>" +
       '<div><h2>Explore</h2><ul class="footer-list">' +
       NAV.slice(1).map(function (n) { return '<li><a href="' + n[0] + '">' + n[1] + "</a></li>"; }).join("") +
-      '<li><a href="support.html">Support our school</a></li><li><a href="apply.html">Apply online</a></li><li><a href="teachers.html">Our staff</a></li><li><a href="krio.html" lang="kri" hreflang="kri">Na Krio</a></li></ul></div>' +
+      '<li><a href="support.html">Support our school</a></li><li><a href="apply.html">Apply online</a></li><li><a href="teachers.html">Our staff</a></li><li><a href="krio.html" lang="kri" hreflang="kri">Na Krio</a></li><li><a href="app.html">Get the app</a></li></ul></div>' +
       '<div><h2>Contact</h2><ul class="footer-list">' +
       '<li><a data-href="tel" href="#">' + esc(S.phone) + "</a></li>" +
       '<li><a data-href="email" href="#">' + esc(S.email) + "</a></li>" +
@@ -637,20 +637,72 @@
   /* ---------- "Install the Gaddiel app" button ---------- */
   function installApp() {
     var deferred = null;
+    var ua = navigator.userAgent || "";
+    var isIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    var isAndroid = /android/i.test(ua);
+    var standalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+    var BTNS = ".install-btn, [data-install]";
+
+    function showButtons(on) { $$(BTNS).forEach(function (b) { b.hidden = !on; }); }
+    function markInstalled() {
+      showButtons(false);
+      $$("[data-app-installed]").forEach(function (el) { el.hidden = false; });
+      $$("[data-app-hint]").forEach(function (el) { el.hidden = true; });
+      closePop();
+    }
+
+    // "Get the app" page: highlight the steps for this visitor's phone
+    var mine = $('[data-os="' + (isIOS ? "ios" : isAndroid ? "android" : "") + '"]');
+    if (mine) mine.classList.add("is-mine");
+    if (standalone) markInstalled();
+
     window.addEventListener("beforeinstallprompt", function (e) {
       e.preventDefault();
       deferred = e;
-      $$(".install-btn").forEach(function (b) { b.hidden = false; });
+      showButtons(true);
+      $$("[data-app-hint]").forEach(function (el) { el.textContent = "Tap the yellow button. It takes a few seconds."; });
     });
+    window.addEventListener("appinstalled", function () { deferred = null; markInstalled(); });
+
+    function install() {
+      if (deferred) {
+        deferred.prompt();
+        deferred.userChoice.then(function (c) { deferred = null; if (c && c.outcome === "accepted") markInstalled(); else showButtons(false); });
+        return;
+      }
+      location.href = "app.html#" + (isIOS ? "iphone" : "android");
+    }
     document.addEventListener("click", function (e) {
-      var b = e.target.closest && e.target.closest(".install-btn");
-      if (!b || !deferred) return;
-      deferred.prompt();
-      deferred.userChoice.then(function () {
-        deferred = null;
-        $$(".install-btn").forEach(function (x) { x.hidden = true; });
-      });
+      var b = e.target.closest && e.target.closest(BTNS + ", [data-pop-install]");
+      if (!b) return;
+      e.preventDefault();
+      install();
     });
+
+    // Small "Get the app" pop-up on phones (not on the app page, not when already installed).
+    // Closing it hides it for 14 days on that phone.
+    var KEY = "gnaps-app-pop";
+    var onAppPage = /app\.html$/.test(location.pathname);
+    var pop = null;
+    function closePop() { if (pop && pop.parentNode) pop.parentNode.removeChild(pop); pop = null; }
+    function hiddenUntil() { try { return Number(localStorage.getItem(KEY)) || 0; } catch (err) { return 0; } }
+    if (!standalone && !onAppPage && (isIOS || isAndroid) && Date.now() > hiddenUntil()) {
+      setTimeout(function () {
+        pop = document.createElement("div");
+        pop.className = "app-pop";
+        pop.setAttribute("role", "dialog");
+        pop.setAttribute("aria-label", "Get the Gaddiel app");
+        pop.innerHTML = '<img src="assets/img/icon-192.png" alt="" width="46" height="46">' +
+          '<div class="app-pop-text"><b>Get the Gaddiel app</b><span>Free, small, works without data</span></div>' +
+          '<a class="btn btn--gold" href="app.html" data-pop-install>' + (isIOS ? "How to" : "Install") + "</a>" +
+          '<button class="app-pop-close" type="button" aria-label="Close">&times;</button>';
+        document.body.appendChild(pop);
+        $(".app-pop-close", pop).addEventListener("click", function () {
+          try { localStorage.setItem(KEY, String(Date.now() + 14 * 864e5)); } catch (err) {}
+          closePop();
+        });
+      }, 5000);
+    }
   }
 
   /* ---------- Gallery filter buttons ---------- */

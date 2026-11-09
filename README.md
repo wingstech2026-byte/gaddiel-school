@@ -354,3 +354,16 @@ Every page has **A / A+ / A++** buttons, in the footer and in the phone menu, to
 Closed parts are not checked and not sent. The class choices (Nursery 1–3, Class 1–6) are the `<label class="choice">` lines in `apply.html`. Change them there if the school's class names are different. The form does not take photo uploads (the free Formspree plan does not allow them), so it asks parents to bring two passport photos and the birth certificate to the office.
 
 **Animations:** on every page, headings, text, cards and form sections slide up gently and fade in as you scroll to them. Photos and buttons fade in, and the top of each page plays as soon as it opens. Each item animates only once. Phones set to "reduce motion" see no animation. Nothing needs to be added to new pages; it is automatic (`motion()` in `assets/js/main.js`).
+
+---
+
+## 26. The Gaddiel app (install on phones)
+
+Parents can put the website on their phone like an app: free, under 1 MB, opens with the Gaddiel icon and works offline. No Play Store is needed.
+
+- **Get the app page:** `https://www.gaddielschool.com/app.html`. It has an **Install the app** button (Android/Chrome), step-by-step help for Android and iPhone (the steps for the visitor's own phone are highlighted), a QR code for computer visitors, and a **Share the app on WhatsApp** button.
+- **Pop-up on phones:** 5 seconds after opening any page, a small "Get the Gaddiel app" card appears. Closing it hides it for 14 days on that phone. It never shows inside the installed app.
+- **Shortcuts:** on Android, press and hold the Gaddiel icon for quick links to Calendar, News, Fees and Apply.
+- **Settings:** `manifest.webmanifest` (name, colours, shortcuts, screenshots in `assets/img/screens/`). The QR code is `assets/img/app-qr.svg`.
+
+**Tip:** share `www.gaddielschool.com/app.html` in parents' WhatsApp groups and print the QR code on letters and notices.
