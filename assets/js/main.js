@@ -203,7 +203,7 @@
      come into view (once). Photos and buttons fade in. The top of each page
      (hero) is animated by the stylesheet as soon as the page opens. */
   function motion() {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    if (!("IntersectionObserver" in window)) return; // phones set to "reduce motion" get a fade only (see style.css)
     var UP = "h1, h2, h3, p, ul, ol, dl, table, blockquote, fieldset, details, .card, .chart, .note-box, .placeholder-note, .stat, .map-box";
     var FADE = "img, picture, figure, video, .btn, .gallery button";
     var SKIP = ".hero, .page-hero, .reveal, dialog, [data-cal], .lightbox, .announcement, .form-status, .field, .choices, nav, .hp-field, [hidden]";

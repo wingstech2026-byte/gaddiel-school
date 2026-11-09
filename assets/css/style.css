@@ -575,11 +575,11 @@ html[data-text-size="2"] { font-size: 125%; }
 @media print { .announce, .text-size, .install-btn, .filter-bar { display: none !important; } }
 
 /* ===== Motion (like a gentle "slide up and fade in") ===== */
-.m-up { opacity: 0; transform: translateY(36px); }
+.m-up { opacity: 0; transform: translateY(48px); }
 .m-fade { opacity: 0; }
 .m-up, .m-fade { transition: opacity 1s ease-in-out, transform 1s ease-in-out; }
 .m-up.m-in, .m-fade.m-in { opacity: 1; transform: none; }
-@keyframes m-rise { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: none; } }
+@keyframes m-rise { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
 @keyframes m-show { from { opacity: 0; } to { opacity: 1; } }
 /* Top of each page plays as soon as it opens */
 .page-hero .wrap > *, .hero .wrap > div:not(.hero-photo) > * { animation: m-rise 1s ease-in-out both; }
@@ -618,4 +618,15 @@ html[data-text-size="2"] { font-size: 125%; }
 .cond-in { animation: m-drop .45s ease-out both; }
 @keyframes m-drop { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
 .form--apply .fs--ask .cond { border-left: 3px solid var(--sky-200); padding-left: 16px; }
-@media (prefers-reduced-motion: reduce) { .m-up, .m-fade { opacity: 1; transform: none; } }
+/* Phones set to "reduce motion" / "remove animations": gentle fade only, no sliding */
+@media (prefers-reduced-motion: reduce) {
+  .m-up { transform: none !important; }
+  .m-up, .m-fade { transition: opacity .8s ease-in-out !important; }
+  .page-hero .wrap > *, .hero .wrap > div:not(.hero-photo) > *, .hero-photo, #site-header { animation: m-show .8s ease-in-out both !important; }
+}
+
+/* Cotton Tree section (home page) */
+.rooted-grid { display: grid; gap: 28px; align-items: center; }
+.rooted-art { max-width: 380px; margin: 0 auto; }
+.rooted-art img { width: 100%; height: auto; filter: drop-shadow(0 10px 22px rgba(13,42,92,.18)); }
+@media (min-width: 860px) { .rooted-grid { grid-template-columns: 1fr 1.2fr; gap: 56px; } }

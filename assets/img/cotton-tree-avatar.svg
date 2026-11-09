@@ -1,5 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-labelledby="ct-title">
   <title id="ct-title">The Cotton Tree of Freetown, Sierra Leone – illustration</title>
+  <style>
+    .flock { animation: drift 9s ease-in-out infinite alternate; }
+    .flap { transform-box: fill-box; transform-origin: 50% 100%; animation: flap .5s ease-in-out infinite alternate; }
+    .flap:nth-child(2n) { animation-delay: -.25s; }
+    .hop { animation: hop 1.1s ease-in-out infinite alternate; }
+    .hop2 { animation-duration: 1.4s; animation-delay: -.5s; }
+    .bob { animation: bob 2.2s ease-in-out infinite alternate; }
+    .swing { transform-box: fill-box; transform-origin: 50% 0%; animation: swing 2.4s ease-in-out infinite alternate; }
+    .wave { transform-box: fill-box; transform-origin: 0% 100%; animation: wave .7s ease-in-out infinite alternate; }
+    .wave2 { animation-delay: -.35s; }
+    @keyframes drift { from { transform: translateX(-24px); } to { transform: translateX(36px); } }
+    @keyframes flap { from { transform: scaleY(1); } to { transform: scaleY(.35); } }
+    @keyframes hop { from { transform: translateY(4px); } to { transform: translateY(-16px); } }
+    @keyframes bob { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+    @keyframes swing { from { transform: rotate(-16deg); } to { transform: rotate(16deg); } }
+    @keyframes wave { from { transform: rotate(-14deg); } to { transform: rotate(18deg); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#2b6cc4"/>
@@ -88,12 +106,12 @@
     </g>
 
     <!-- birds passing overhead -->
-    <g fill="none" stroke="#0d2a5c" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M70 92 q9 -9 18 0 q9 -9 18 0"/>
-      <path d="M112 66 q7 -7 14 0 q7 -7 14 0"/>
-      <path d="M150 44 q6 -6 12 0 q6 -6 12 0"/>
-      <path d="M96 124 q6 -6 12 0 q6 -6 12 0"/>
-      <path d="M440 176 q6 -6 12 0 q6 -6 12 0"/>
+    <g class="flock" fill="none" stroke="#0d2a5c" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+      <path class="flap" d="M70 92 q9 -9 18 0 q9 -9 18 0"/>
+      <path class="flap" d="M112 66 q7 -7 14 0 q7 -7 14 0"/>
+      <path class="flap" d="M150 44 q6 -6 12 0 q6 -6 12 0"/>
+      <path class="flap" d="M96 124 q6 -6 12 0 q6 -6 12 0"/>
+      <path class="flap" d="M440 176 q6 -6 12 0 q6 -6 12 0"/>
     </g>
 
     <!-- monkeys -->
@@ -108,7 +126,7 @@
       </g>
     </defs>
     <!-- jumping across the top of the crown -->
-    <g transform="translate(300 64) rotate(-18)">
+    <g transform="translate(300 64) rotate(-18)"><g class="hop">
       <path d="M-30 18 q-8 -4 -12 2 M-36 6 q-10 0 -14 6" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" opacity=".8"/>
       <path d="M-8 10 C-22 16 -26 0 -18 -2" stroke="#7b4a28" stroke-width="3.5" fill="none" stroke-linecap="round"/>
       <g stroke="#7b4a28" stroke-width="4" stroke-linecap="round">
@@ -118,17 +136,17 @@
       <ellipse rx="8" ry="11" fill="#7b4a28"/>
       <ellipse cy="2" rx="4.5" ry="7" fill="#c08a5c"/>
       <use href="#monkeyHead" transform="translate(6 -14)"/>
-    </g>
+    </g></g>
     <!-- sitting on the top of the tree -->
-    <g transform="translate(212 72)">
+    <g transform="translate(212 72)"><g class="bob">
       <path d="M8 6 C22 8 22 -10 14 -12" stroke="#7b4a28" stroke-width="3.5" fill="none" stroke-linecap="round"/>
       <ellipse rx="8" ry="10" fill="#7b4a28"/>
       <ellipse cy="2" rx="4.5" ry="6" fill="#c08a5c"/>
       <g stroke="#7b4a28" stroke-width="4" stroke-linecap="round"><path d="M-6 -2 L-14 -14"/><path d="M-5 9 L-9 14"/><path d="M5 9 L9 14"/></g>
       <use href="#monkeyHead" transform="translate(0 -14)"/>
-    </g>
+    </g></g>
     <!-- swinging from the left branch by its tail -->
-    <g transform="translate(150 226)">
+    <g transform="translate(150 226)"><g class="swing">
       <path d="M0 -12 C-2 -22 6 -26 4 -18" stroke="#7b4a28" stroke-width="3.5" fill="none" stroke-linecap="round"/>
       <g transform="rotate(14)">
         <path d="M0 -10 C0 -2 0 2 0 4" stroke="#7b4a28" stroke-width="3.5"/>
@@ -137,9 +155,9 @@
         <g stroke="#7b4a28" stroke-width="4" stroke-linecap="round"><path d="M-6 16 L-14 26"/><path d="M6 16 L14 26"/></g>
         <use href="#monkeyHead" transform="translate(0 28) rotate(180)"/>
       </g>
-    </g>
+    </g></g>
     <!-- leaping from the right branch -->
-    <g transform="translate(392 222) rotate(24)">
+    <g transform="translate(392 222) rotate(24)"><g class="hop hop2">
       <path d="M-6 8 C-18 14 -22 2 -16 -2" stroke="#7b4a28" stroke-width="3.5" fill="none" stroke-linecap="round"/>
       <g stroke="#7b4a28" stroke-width="4" stroke-linecap="round">
         <path d="M4 -6 L10 -20"/><path d="M-3 -7 L-2 -21"/>
@@ -148,7 +166,7 @@
       <ellipse rx="8" ry="11" fill="#7b4a28"/>
       <ellipse cy="2" rx="4.5" ry="7" fill="#c08a5c"/>
       <use href="#monkeyHead" transform="translate(2 -15)"/>
-    </g>
+    </g></g>
 
     <!-- children in Gaddiel blue standing under the tree -->
     <defs>
@@ -184,7 +202,7 @@
     <!-- each child: arm on the right side drawn separately (waving or down) -->
     <g transform="translate(150 414)">
       <use href="#girl"/>
-      <path d="M9 -38 L18 -56" stroke="#7a4a2c" stroke-width="4.2" stroke-linecap="round"/>
+      <path class="wave" d="M9 -38 L18 -56" stroke="#7a4a2c" stroke-width="4.2" stroke-linecap="round"/>
     </g>
     <g transform="translate(192 418)">
       <use href="#boy"/>
@@ -196,7 +214,7 @@
     </g>
     <g transform="translate(364 414)">
       <use href="#boy"/>
-      <path d="M10 -38 L19 -56" stroke="#7a4a2c" stroke-width="4.5" stroke-linecap="round"/>
+      <path class="wave wave2" d="M10 -38 L19 -56" stroke="#7a4a2c" stroke-width="4.5" stroke-linecap="round"/>
     </g>
   </g>
 
