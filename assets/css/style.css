@@ -675,3 +675,15 @@ html[data-text-size="2"] { font-size: 125%; }
 @media (prefers-reduced-motion: reduce) {
   .brand img, .brand-name, .brand-sub, .footer-brand.m-in img { animation: m-show .8s ease-in-out backwards !important; }
 }
+
+/* ===== Sierra Leone flag in the header (waves gently) ===== */
+.brand-name { display: inline-flex; align-items: center; gap: 8px; }
+.sl-flag { display: inline-flex; align-items: flex-start; height: 24px; animation: brand-slide .7s ease-out .9s backwards; }
+.sl-pole { width: 2px; height: 24px; background: #8a96a3; border-radius: 1px; position: relative; }
+.sl-pole::before { content: ""; position: absolute; top: -2px; left: -1.5px; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+.sl-cloth { display: flex; height: 16px; margin-top: 1px; filter: drop-shadow(0 1px 1px rgba(13,42,92,.25)); }
+.sl-cloth i { display: block; width: 2px; height: 16px;
+  background: linear-gradient(to bottom, #1eb53a 0 33.34%, #ffffff 33.34% 66.67%, #0072c6 66.67% 100%);
+  animation: sl-wave 1.1s ease-in-out infinite alternate; }
+.sl-cloth i:nth-child(odd) { filter: brightness(.94); }
+@keyframes sl-wave { from { transform: translateY(-1.5px); } to { transform: translateY(1.5px); } }

@@ -73,6 +73,13 @@
   var page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
   if (page.indexOf(".") === -1) page += ".html";
 
+  // Small waving Sierra Leone flag (green, white, blue) shown beside the school name
+  function slFlag() {
+    var strips = "";
+    for (var i = 0; i < 12; i++) strips += '<i style="animation-delay:' + (-i * 0.09).toFixed(2) + 's"></i>';
+    return '<span class="sl-flag" aria-hidden="true" title="Sierra Leone"><span class="sl-pole"></span><span class="sl-cloth">' + strips + "</span></span>";
+  }
+
   function renderHeader() {
     var host = $("#site-header");
     if (!host) return;
@@ -83,7 +90,7 @@
       '<header class="site-header"><div class="wrap">' +
       '<a class="brand" href="index.html" aria-label="' + esc(S.name) + ', home">' +
       '<img src="assets/img/logo.png" alt="" width="50" height="50">' +
-      '<span class="brand-text"><span class="brand-name">Gaddiel</span><span class="brand-sub">Nursery &amp; Preparatory School</span></span></a>' +
+      '<span class="brand-text"><span class="brand-name">Gaddiel' + slFlag() + '</span><span class="brand-sub">Nursery &amp; Preparatory School</span></span></a>' +
       '<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">' + I.menu + "<span>Menu</span></button>" +
       '<nav class="site-nav" id="site-nav" aria-label="Main"><ul>' + items +
       '<li class="nav-textsize">' + textSizeHTML() + '</li><li class="nav-lang"><a href="krio.html" lang="kri" hreflang="kri">Na Krio</a></li><li class="nav-cta"><a href="support.html"' + (page === "support.html" ? ' aria-current="page"' : "") + ">Support our school</a></li></ul></nav>" +
