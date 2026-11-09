@@ -558,6 +558,7 @@ html[data-text-size="2"] { font-size: 125%; }
 .install-btn { margin-top: 14px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border-radius: 99px; border: 2px solid var(--gold); background: transparent; color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
 .install-btn:hover { background: var(--gold); color: var(--blue-900); }
 .install-btn[hidden] { display: none; }
+.install-btn svg { width: 20px; height: 20px; flex: none; }
 
 .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
 .filter-bar button { min-height: 44px; padding: 8px 18px; border-radius: 99px; border: 2px solid var(--blue-700); background: #fff; color: var(--blue-700); font: inherit; font-weight: 700; cursor: pointer; }
@@ -630,3 +631,26 @@ html[data-text-size="2"] { font-size: 125%; }
 .rooted-art { max-width: 380px; margin: 0 auto; }
 .rooted-art img { width: 100%; height: auto; filter: drop-shadow(0 10px 22px rgba(13,42,92,.18)); }
 @media (min-width: 860px) { .rooted-grid { grid-template-columns: 1fr 1.2fr; gap: 56px; } }
+
+/* ===== Footer: wave edge and flying birds ===== */
+.site-footer { position: relative; margin-top: 70px; padding-top: 56px; }
+.site-footer::before { content: ""; position: absolute; left: 0; right: 0; top: -69px; height: 70px; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1280 140' preserveAspectRatio='none'%3E%3Cpath d='M0 70 C160 20 320 10 480 40 C640 70 800 130 960 110 C1100 92 1200 50 1280 40 V140 H0Z' fill='%23f6b313'/%3E%3Cpath d='M0 92 C160 42 320 32 480 62 C640 92 800 140 960 124 C1100 110 1200 72 1280 62 V140 H0Z' fill='%230d2a5c'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat; }
+.site-footer > .wrap { position: relative; z-index: 1; }
+.footer-birds { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.fbird { position: absolute; left: 0; color: rgba(255,255,255,.55); animation: fly-across 22s linear infinite; }
+.fbird-wing { display: block; transform-origin: 50% 70%; animation: flap-wings .45s ease-in-out infinite alternate; }
+.fbird--1 { top: 14%; animation-duration: 24s; animation-delay: -3s; }
+.fbird--2 { top: 22%; animation-duration: 28s; animation-delay: -12s; }
+.fbird--2 .fbird-wing { animation-duration: .55s; }
+.fbird--3 { top: 44%; animation-duration: 32s; animation-delay: -20s; color: rgba(246,179,19,.5); }
+.fbird--4 { top: 9%; animation-duration: 26s; animation-delay: -7s; }
+.fbird--4 .fbird-wing { animation-duration: .38s; }
+@keyframes fly-across {
+  0% { transform: translate(-60px, 0) scale(.8); }
+  25% { transform: translate(25vw, -14px) scale(.8); }
+  50% { transform: translate(50vw, 8px) scale(.8); }
+  75% { transform: translate(75vw, -10px) scale(.8); }
+  100% { transform: translate(calc(100vw + 60px), 0) scale(.8); }
+}
+@keyframes flap-wings { from { transform: scaleY(1); } to { transform: scaleY(.3); } }

@@ -118,12 +118,20 @@
     return '<p class="dev-credit">' + photo + "<span>" + bits.join(" · ") + "</span></p>";
   }
 
+  // Little birds that fly across the footer, flapping their wings (decoration only)
+  function footerBirds() {
+    var bird = '<svg viewBox="0 0 40 18" width="34" height="16"><path d="M20 13 Q12 1 1 5 M20 13 Q28 1 39 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';
+    var html = "";
+    for (var i = 1; i <= 4; i++) html += '<span class="fbird fbird--' + i + '"><span class="fbird-wing">' + bird + "</span></span>";
+    return '<div class="footer-birds" aria-hidden="true">' + html + "</div>";
+  }
+
   function renderFooter() {
     var host = $("#site-footer");
     if (!host) return;
     var a = S.address || {};
     host.innerHTML =
-      '<footer class="site-footer"><div class="wrap"><div class="footer-grid">' +
+      '<footer class="site-footer">' + footerBirds() + '<div class="wrap"><div class="footer-grid">' +
       '<div><div class="footer-brand"><img src="assets/img/logo-white.png" alt="" width="56" height="56" loading="lazy"><b>' + esc(S.name) + "</b></div>" +
       '<p class="footer-motto">“' + esc(S.motto) + '”</p><p>' + esc(S.mottoMeaning) + ".</p>" +
       "<p>" + esc(a.street) + ", " + esc(a.city) + "<br>" + esc(a.country) + ", " + esc(a.region) + "</p></div>" +
@@ -206,7 +214,7 @@
     if (!("IntersectionObserver" in window)) return; // phones set to "reduce motion" get a fade only (see style.css)
     var UP = "h1, h2, h3, p, ul, ol, dl, table, blockquote, fieldset, details, .card, .chart, .note-box, .placeholder-note, .stat, .map-box";
     var FADE = "img, picture, figure, video, .btn, .gallery button";
-    var SKIP = ".hero, .page-hero, .reveal, dialog, [data-cal], .lightbox, .announcement, .form-status, .field, .choices, nav, .hp-field, [hidden]";
+    var SKIP = ".hero, .page-hero, .reveal, .dev-credit, .footer-bottom, .footer-birds, dialog, [data-cal], .lightbox, .announcement, .form-status, .field, .choices, nav, .hp-field, [hidden]";
     var picked = $$("main " + UP.split(", ").join(", main ") + ", main " + FADE.split(", ").join(", main ") + ", footer h2, footer h3, footer p, footer ul");
     var set = new Set(picked), vh = window.innerHeight;
     var els = picked.filter(function (el) {
@@ -225,7 +233,7 @@
         el.classList.add("m-in");
         setTimeout(function () { el.classList.remove("m-up", "m-fade", "m-in"); el.style.transitionDelay = ""; }, 1700);
       });
-    }, { rootMargin: "0px 0px -8% 0px" });
+    }, { rootMargin: "0px", threshold: 0.05 });
     els.forEach(function (el) { io.observe(el); });
   }
 
