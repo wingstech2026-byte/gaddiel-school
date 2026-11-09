@@ -3,7 +3,7 @@
    so the site still opens when there is no mobile data.
    Staff do not need to edit this file. If you ever rename or remove one of
    the files in CORE below, update the list and change VERSION (e.g. v2). */
-var VERSION = "gnaps-v10";
+var VERSION = "gnaps-v11";
 var CORE = [
   "./", "index.html", "about.html", "programmes.html", "school-life.html",
   "admissions.html", "apply.html", "calendar.html", "support.html", "news.html",
@@ -54,7 +54,7 @@ self.addEventListener("fetch", function (e) {
   if (url.origin !== self.location.origin) return;          // maps, fonts, forms: leave to the browser
   if (url.pathname.indexOf("/_vercel/") === 0) return;        // visitor statistics
   if (url.pathname.indexOf("/admin") === 0) return;           // staff website editor
-  if (/\.(mp4|pdf)$/i.test(url.pathname)) return;             // large files are not saved
+  if (/\.(mp4|pdf|apk)$/i.test(url.pathname)) return;         // large files are not saved
   if (req.mode === "navigate" || /(\/|\.html|\.json|\.js|\.css)$/i.test(url.pathname)) {
     e.respondWith(networkFirst(req));
   } else {

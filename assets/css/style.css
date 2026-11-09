@@ -719,3 +719,6 @@ html[data-text-size="2"] { font-size: 125%; }
 .app-pop-close { flex: none; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--grey-100); color: var(--grey-700); font-size: 1.3rem; cursor: pointer; }
 @media (min-width: 900px) { .app-pop { display: none; } }
 @keyframes pop-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+.app-download { gap: 10px; }
+.app-download svg { flex: none; }
+.app-ios-hint[hidden] { display: none; }

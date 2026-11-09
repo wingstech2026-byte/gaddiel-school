@@ -654,6 +654,11 @@
     // "Get the app" page: highlight the steps for this visitor's phone
     var mine = $('[data-os="' + (isIOS ? "ios" : isAndroid ? "android" : "") + '"]');
     if (mine) mine.classList.add("is-mine");
+    // The Android download does not work on iPhone: show the iPhone steps instead
+    if (isIOS) {
+      $$("[data-apk]").forEach(function (el) { el.hidden = true; el.style.display = "none"; });
+      $$("[data-ios-only]").forEach(function (el) { el.hidden = false; });
+    }
     if (standalone) markInstalled();
 
     window.addEventListener("beforeinstallprompt", function (e) {
@@ -673,7 +678,7 @@
       location.href = "app.html#" + (isIOS ? "iphone" : "android");
     }
     document.addEventListener("click", function (e) {
-      var b = e.target.closest && e.target.closest(BTNS + ", [data-pop-install]");
+      var b = e.target.closest && e.target.closest(BTNS);
       if (!b) return;
       e.preventDefault();
       install();
@@ -694,7 +699,7 @@
         pop.setAttribute("aria-label", "Get the Gaddiel app");
         pop.innerHTML = '<img src="assets/img/icon-192.png" alt="" width="46" height="46">' +
           '<div class="app-pop-text"><b>Get the Gaddiel app</b><span>Free, small, works without data</span></div>' +
-          '<a class="btn btn--gold" href="app.html" data-pop-install>' + (isIOS ? "How to" : "Install") + "</a>" +
+          '<a class="btn btn--gold" href="app.html" data-pop-install>' + (isIOS ? "How to" : "Get app") + "</a>" +
           '<button class="app-pop-close" type="button" aria-label="Close">&times;</button>';
         document.body.appendChild(pop);
         $(".app-pop-close", pop).addEventListener("click", function () {

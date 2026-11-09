@@ -367,3 +367,12 @@ Parents can put the website on their phone like an app: free, under 1 MB, opens 
 - **Settings:** `manifest.webmanifest` (name, colours, shortcuts, screenshots in `assets/img/screens/`). The QR code is `assets/img/app-qr.svg`.
 
 **Tip:** share `www.gaddielschool.com/app.html` in parents' WhatsApp groups and print the QR code on letters and notices.
+
+### Android app download (APK)
+
+The app page also offers a real Android app: **Download for Android** (`assets/app/gaddiel-school.apk`, about 2.6 MB, package name `com.gaddielschool.app`, version 1.0). It was built from the website with PWABuilder (Google's Trusted Web Activity technology), so it always shows the live website: changes to the website appear in the app without a new download.
+
+- `/.well-known/assetlinks.json` proves the app belongs to www.gaddielschool.com, so the app opens full-screen without an address bar. **Do not delete or change it.**
+- **The signing key is NOT in this repository.** It is in the folder `Gaddiel_App_Signing_Key` on the developer's Desktop (`signing.keystore` and `signing-key-info.txt`). Back it up. It is needed to publish any update, or to put the app on Google Play.
+- **To publish on Google Play later:** create a Google Play developer account (one-time US$25), then upload `Gaddiel School.aab` from that folder. Then add Google Play's app-signing SHA-256 fingerprint to `assetlinks.json`.
+- iPhones cannot install APK files. iPhone users add the site to their home screen instead (steps on the app page).

@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.gaddielschool.app",
+        "sha256_cert_fingerprints": ["E2:FF:4A:85:13:49:04:A2:57:3B:03:24:8E:E5:DB:C7:D5:22:8D:E3:12:6B:34:9A:11:CA:A9:29:C2:54:36:EC"]
+      }
+    }]
