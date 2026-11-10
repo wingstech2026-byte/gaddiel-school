@@ -248,7 +248,7 @@
   function maps() {
     $$("[data-map]").forEach(function (box) {
       function load() {
-        box.innerHTML = '<iframe src="' + esc(get("links.mapEmbed")) + '" title="Map showing 143 Fort Street, Freetown" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>';
+        box.innerHTML = '<iframe src="' + esc(get("links.mapEmbed")) + '" title="Map showing 43 Fort Street, Freetown" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>';
       }
       if (box.getAttribute("data-map") === "auto") { load(); return; }
       var b = $("button", box);
@@ -430,7 +430,7 @@
     }
     var desc = (ev.description || "") + (ev.tbc ? " (Date to be confirmed)" : "");
     lines.push("SUMMARY:" + icsEsc(ev.title + " - Gaddiel School"), "DESCRIPTION:" + icsEsc(desc),
-      "LOCATION:" + icsEsc(ev.location || "Gaddiel Nursery & Preparatory School, 143 Fort Street, Freetown"),
+      "LOCATION:" + icsEsc(ev.location || "Gaddiel Nursery & Preparatory School, 43 Fort Street, Freetown"),
       "END:VEVENT", "END:VCALENDAR");
     return "data:text/calendar;charset=utf-8," + encodeURIComponent(lines.join("\r\n"));
   }

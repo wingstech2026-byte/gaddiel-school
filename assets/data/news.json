@@ -2,6 +2,35 @@
   "_help": "Newest story first. date is YYYY-MM-DD. image is optional (a file in assets/img/). Each paragraph is one line in quotes inside body, separated by commas.",
   "news": [
     {
+      "id": "christmas-message-2026",
+      "date": "2026-11-10",
+      "title": "A Christmas message from our Proprietress",
+      "image": "assets/img/we-are-gaddiel-sm.jpg",
+      "imageAlt": "The Gaddiel school family together",
+      "summary": "I want to express my heartfelt gratitude for an incredible year at Gaddiel. May we continue to collaborate as a team and make progress in the years to come.",
+      "body": [
+        "I want to express my heartfelt gratitude for an incredible year at Gaddiel. May we continue to collaborate as a team and make progress in the years to come. Kudos on a job well done! You’re one of my many blessings.",
+        "Wishing you a Christmas that sparkles and a New Year that shines! May the spirit of Christmas be with you 🎄",
+        "I wish you a peaceful end to 2026 and a joyful, safe passage into 2027.",
+        "Josephine (Mrs. Josephine Olu Taylor, Proprietress)",
+        "#NothingButLove ❤️"
+      ]
+    },
+    {
+      "id": "first-term-dates-2026",
+      "date": "2026-11-09",
+      "title": "First term activities: exams, Carol Service and Christmas Party",
+      "image": "assets/img/church-pupils-singing-sm.jpg",
+      "imageAlt": "Gaddiel pupils singing together",
+      "summary": "Final exams are on 7 December, the Carol Service is on 17 December and the Christmas Party is on 19 December.",
+      "body": [
+        "Final exams: Monday 7 December 2026.",
+        "Carol Service: Thursday 17 December 2026. Parents and families are warmly invited.",
+        "Christmas Party: Saturday 19 December 2026.",
+        "All dates are also on the school calendar, where you can add them to your phone."
+      ]
+    },
+    {
       "id": "5th-anniversary",
       "date": "2026-09-13",
       "title": "Happy 5th Anniversary to Gaddiel Nursery and Preparatory School!",
@@ -22,7 +51,7 @@
       "imageAlt": "A smiling pupil at his desk in a Gaddiel classroom",
       "summary": "Admissions are open for Nursery and Preparatory classes! Give your child a strong start in a school where every child gets individual attention.",
       "body": [
-        "Visit us at 143 Fort Street or call us to book a visit. Ep All Pikin Dem Fo Betteh!"
+        "Visit us at 43 Fort Street or call us to book a visit. Ep All Pikin Dem Fo Betteh!"
       ]
     },
     {

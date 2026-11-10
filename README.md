@@ -1,6 +1,6 @@
 # Gaddiel Nursery & Preparatory School website
 
-A simple website for Gaddiel Nursery & Preparatory School (GNAPS), 143 Fort Street, Freetown.
+A simple website for Gaddiel Nursery & Preparatory School (GNAPS), 43 Fort Street, Freetown.
 It is made of plain files. There is nothing to install and no "build" step.
 
 ---

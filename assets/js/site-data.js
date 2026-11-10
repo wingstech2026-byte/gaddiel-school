@@ -22,7 +22,7 @@ window.SITE = {
   siteUrl: "https://www.gaddielschool.com",
 
   address: {
-    street: "143 Fort Street",
+    street: "43 Fort Street",
     city: "Freetown",
     country: "Sierra Leone",
     region: "West Africa"
@@ -33,7 +33,7 @@ window.SITE = {
   phone: "[PLACEHOLDER phone]",
   /* WhatsApp number: digits only with country code, e.g. "23276123456" */
   whatsapp: "[PLACEHOLDER WhatsApp]",
-  email: "[PLACEHOLDER email]",
+  email: "gaddielfortst@gmail.com",
 
   hours: [
     { days: "Monday to Friday", time: "8:00 AM – 3:00 PM" },
@@ -48,8 +48,8 @@ window.SITE = {
     gofundme: "[PLACEHOLDER GoFundMe URL]",
     /* WhatsApp Channel invite link, e.g. https://whatsapp.com/channel/... */
     whatsappChannel: "[PLACEHOLDER WhatsApp Channel link]",
-    directions: "https://www.google.com/maps/dir/?api=1&destination=143+Fort+Street,+Freetown,+Sierra+Leone",
-    mapEmbed: "https://www.google.com/maps?q=143+Fort+Street,+Freetown,+Sierra+Leone&output=embed"
+    directions: "https://www.google.com/maps/dir/?api=1&destination=43+Fort+Street,+Freetown,+Sierra+Leone",
+    mapEmbed: "https://www.google.com/maps?q=43+Fort+Street,+Freetown,+Sierra+Leone&output=embed"
   },
 
   /* FORMS: create a free form at formspree.io and paste its ID here,
@@ -97,7 +97,7 @@ window.SITE = {
       "Welcome to Gaddiel Nursery & Preparatory School. When we opened our doors on 13 September 2021, we had just three pupils, one teacher, a helper and a maintenance worker. Today, by God’s grace, we have 98 pupils and a dedicated team of six teachers, a helper and a maintenance worker.",
       "Our motto, “Ep All Pikin Dem Fo Betteh”, is our promise to you: we are here to help every child, not just a few, grow in knowledge, confidence and good character.",
       "Our small classes mean every child is known by name, taught with patience and encouraged to reach their full potential. We follow each child’s progress and behaviour closely, and we keep parents informed.",
-      "We would love to welcome you and your child. Please come and visit us at 143 Fort Street, Monday to Friday, 8:00 AM to 3:00 PM."
+      "We would love to welcome you and your child. Please come and visit us at 43 Fort Street, Monday to Friday, 8:00 AM to 3:00 PM."
     ],
     signoff: "God bless you,"
   },
@@ -125,7 +125,7 @@ window.SITE = {
       { title: "Orange Money", details: [["Number", "[PLACEHOLDER Orange Money number]"], ["Account name", "[PLACEHOLDER account name]"]] },
       { title: "Afrimoney", details: [["Number", "[PLACEHOLDER Afrimoney number]"], ["Account name", "[PLACEHOLDER account name]"]] },
       { title: "Bank transfer", details: [["Bank", "[PLACEHOLDER bank name]"], ["Account name", "[PLACEHOLDER account name]"], ["Account number", "[PLACEHOLDER account number]"], ["Branch", "[PLACEHOLDER branch]"]] },
-      { title: "At the school office", details: [["Where", "143 Fort Street, Freetown"], ["When", "Monday to Friday, 8:00 AM – 3:00 PM"]], note: "Always ask for a receipt." }
+      { title: "At the school office", details: [["Where", "43 Fort Street, Freetown"], ["When", "Monday to Friday, 8:00 AM – 3:00 PM"]], note: "Always ask for a receipt." }
     ]
   },
 
