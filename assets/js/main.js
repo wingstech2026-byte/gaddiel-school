@@ -313,10 +313,14 @@
     });
   }
 
-  /* ---------- Forms (Formspree) ---------- */
+  /* ---------- Forms: sent to the school email (FormSubmit), or Formspree if an ID is set ---------- */
   function forms() {
+    var useFormspree = !isPH(S.formspreeId);
+    var toEmail = S.formsEmail || S.email;
+    var canSend = useFormspree || (toEmail && !isPH(toEmail));
     $$("form[data-form]").forEach(function (form) {
-      if (!isPH(S.formspreeId)) form.action = "https://formspree.io/f/" + S.formspreeId;
+      if (useFormspree) form.action = "https://formspree.io/f/" + S.formspreeId;
+      else if (canSend) form.action = "https://formsubmit.co/ajax/" + toEmail;
       var status = $(".form-status", form);
       var fields = $$("input, select, textarea", form).filter(function (f) { return !f.closest(".hp-field") && f.type !== "hidden"; });
 
@@ -380,14 +384,28 @@
         var hp = $(".hp-field input", form);
         if (hp && hp.value) { done(); return; } // spam bot: pretend success
 
-        if (isPH(S.formspreeId)) {
-          showStatus("err", "This form is not connected yet. The school needs to add its Formspree ID in assets/js/site-data.js. Meanwhile, please call or WhatsApp us.");
+        if (!canSend) {
+          showStatus("err", "This form is not connected yet. Meanwhile, please call or WhatsApp us.");
           return;
         }
         var btn = $("button[type=submit]", form), label = btn.textContent;
         btn.disabled = true; btn.textContent = "Sending…";
-        fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
-          .then(function (r) { if (!r.ok) throw new Error(r.status); done(); })
+        var data = new FormData(form);
+        if (!useFormspree) {
+          data.delete("_gotcha");                 // spam trap is checked above
+          data.append("_template", "table");      // tidy email layout
+          data.append("_captcha", "false");
+          data.append("Sent from page", location.href.split("#")[0]);
+        }
+        fetch(form.action, { method: "POST", body: data, headers: { Accept: "application/json" } })
+          .then(function (r) {
+            if (!r.ok) throw new Error(r.status);
+            return r.json().catch(function () { return {}; });
+          })
+          .then(function (j) {
+            if (j && (j.success === false || j.success === "false")) throw new Error(j.message || "not sent");
+            done();
+          })
           .catch(function () { showStatus("err", "Sorry, your message could not be sent. Please check your internet connection and try again, or call us."); })
           .then(function () { btn.disabled = false; btn.textContent = label; });
       });

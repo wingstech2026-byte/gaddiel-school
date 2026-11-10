@@ -52,8 +52,11 @@ window.SITE = {
     mapEmbed: "https://www.google.com/maps?q=43+Fort+Street,+Freetown,+Sierra+Leone&output=embed"
   },
 
-  /* FORMS: create a free form at formspree.io and paste its ID here,
-     e.g. "xyzabcd" (the part after formspree.io/f/) */
+  /* FORMS: every form on the website is emailed to formsEmail (through
+     the free service formsubmit.co). The very first time a form is sent,
+     FormSubmit emails that address an "Activate form" link: click it once.
+     Optional: to use Formspree instead, paste its form ID below. */
+  formsEmail: "gaddielfortst@gmail.com",
   formspreeId: "[PLACEHOLDER Formspree ID]",
 
   /* NUMBERS --------------------------------------------------------- */

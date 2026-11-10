@@ -43,7 +43,7 @@ Search the project for the word `PLACEHOLDER` to find every one. They are:
 | GoFundMe URL | `site-data.js` → `links.gofundme` | the full `https://www.gofundme.com/f/...` link |
 | GoFundMe goal | `site-data.js` → `gofundmeGoal` | e.g. `"$10,000"` |
 | What donations pay for | `site-data.js` → `donationNeeds` | the school's real needs (remove the `[PLACEHOLDER]` text) |
-| Formspree form ID | `site-data.js` → `formspreeId` | see section 8 |
+| Email the forms go to | `site-data.js` → `formsEmail` | see section 8 |
 | Parent reviews | `site-data.js` → `reviews` | 2–3 short real quotes, **with the parents' permission** |
 | Website address | `site-data.js` → `siteUrl`, plus every `.html` file, `sitemap.xml` and `robots.txt` | the real address once the site is live (see section 9) |
 | Admission requirements | `admissions.html` (yellow box) | ages, documents to bring, fees, when forms are available |
@@ -149,15 +149,15 @@ Leave everything inside `< >` alone. The menu and footer are the same on every p
 
 ---
 
-## 8. Make the forms work (Formspree, free)
+## 8. Where the forms go (school email)
 
-1. Go to <https://formspree.io> and sign up with the school's email address.
-2. Create a **New form** and name it "Gaddiel website".
-3. Formspree shows an address like `https://formspree.io/f/xyzabcd`. Copy only the last part (`xyzabcd`).
-4. In `assets/js/site-data.js`, set `formspreeId: "xyzabcd",`
-5. Publish the site, send a test message from the Contact page, and confirm the email in Formspree the first time.
+Every form is emailed to **gaddielfortst@gmail.com** through the free service FormSubmit (formsubmit.co). No account is needed.
 
-The Contact form, the Admissions enquiry form, the **Apply online** form and the Home page “Stay in touch” sign-up, the “Tell us you’ve paid” form (Paying fees page) and the “Other ways to help” form (Support page) will then all send messages to the school's email. Each form checks the fields before sending, shows a thank-you message, and has a hidden "honeypot" field that catches spam robots.
+- The address is `formsEmail` in `assets/js/site-data.js`. To send the forms somewhere else, change it there **and** in the `action="https://formsubmit.co/..."` of each `<form>` (used only if a phone blocks JavaScript).
+- **One-time step:** the first time a form is sent, FormSubmit emails gaddielfortst@gmail.com with the subject “Action Required: Activate FormSubmit”. Open it and click **Activate Form**. Until then, forms show an error. Check the Spam folder too.
+- Optional: to use Formspree instead, sign up at <https://formspree.io>, create a form and set `formspreeId: "xyzabcd",` in `site-data.js`. Formspree then takes over.
+
+The Contact form, the Admissions enquiry form, the **Apply online** form and the Home page “Stay in touch” sign-up, the “Tell us you’ve paid” form (Paying fees page) and the “Other ways to help” form (Support page) all send messages to the school's email. Each form checks the fields before sending, shows a thank-you message, and has a hidden "honeypot" field that catches spam robots.
 
 ---
 
@@ -244,7 +244,7 @@ To add another video, keep it **short (under 30 seconds) and small (under 2 MB)*
 
 ## 14. Apply online
 
-`apply.html` is the full online admission form. It asks for the child’s details, the parent’s details and an emergency contact, and it needs a tick to confirm. Applications arrive by email through Formspree (section 8), with the subject “New admission application”.
+`apply.html` is the full online admission form. It asks for the child’s details, the parent’s details and an emergency contact, and it needs a tick to confirm. Applications arrive by email at gaddielfortst@gmail.com (section 8), with the subject “New admission application”.
 
 ---
 
@@ -351,7 +351,7 @@ Every page has **A / A+ / A++** buttons, in the footer and in the phone menu, to
 - **Home address → Different address** opens an address box.
 - **Add a second parent or guardian? → Yes** opens the second parent's details.
 
-Closed parts are not checked and not sent. The class choices (Nursery 1–3, Class 1–6) are the `<label class="choice">` lines in `apply.html`. Change them there if the school's class names are different. The form does not take photo uploads (the free Formspree plan does not allow them), so it asks parents to bring two passport photos and the birth certificate to the office.
+Closed parts are not checked and not sent. The class choices (Nursery 1–3, Class 1–6) are the `<label class="choice">` lines in `apply.html`. Change them there if the school's class names are different. The form does not take photo uploads (the free form service does not allow them), so it asks parents to bring two passport photos and the birth certificate to the office.
 
 **Animations:** on every page, headings, text, cards and form sections slide up gently and fade in as you scroll to them. Photos and buttons fade in, and the top of each page plays as soon as it opens. Each item animates only once. Phones set to "reduce motion" see no animation. Nothing needs to be added to new pages; it is automatic (`motion()` in `assets/js/main.js`).
 
